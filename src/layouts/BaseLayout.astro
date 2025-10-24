@@ -1,0 +1,42 @@
+---
+const { title = 'Julien Jeangirard Coaching', description = 'Préparation mentale, coaching de vie et coaching en entreprise — Pontarlier, Doubs & Suisse voisine.', url = 'https://www.julienjeangirard-coaching.fr', image = '/images/og-image.jpg' } = Astro.props;
+---
+
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <meta name="theme-color" content="#0B0E11" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={url} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <style is:global>
+      :root{
+        --bg:#0B0E11; --surface:#11151A;
+        --text:#E5E7EB; --text-muted:#B6BDC6;
+        --accent:#E3FF04;
+        --success:#22C55E; --warning:#F59E0B; --error:#EF4444;
+        --r-lg:16px; --r-xl:24px;
+      }
+      html,body{height:100%}
+      body{background:var(--bg); color:var(--text);}
+      .container{max-width:1200px; margin:0 auto; padding:0 1rem;}
+      @media (prefers-reduced-motion: reduce){
+        *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+      }
+      /* Focus visible */
+      :focus-visible{outline:3px solid var(--accent); outline-offset:3px; border-radius:8px}
+    </style>
+  </head>
+  <body class="min-h-dvh antialiased">
+    <slot />
+  </body>
+</html>

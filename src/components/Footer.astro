@@ -1,0 +1,36 @@
+---
+interface Props {
+  address?: string; phones?: string[]; email?: string;
+  social?: { label: string; href: string }[];
+  legalLinks?: { label: string; href: string }[];
+}
+const { address, phones = [], email, social = [], legalLinks = [] } = Astro.props as Props;
+---
+
+<footer class="mt-20 border-t border-white/10">
+  <div class="container py-10 grid md:grid-cols-3 gap-8">
+    <div>
+      <p class="font-semibold">Julien Jeangirard Coaching</p>
+      {address && <p class="text-text-muted mt-2">{address}</p>}
+      {email && <p class="mt-2"><a href={`mailto:${email}`} class="hover:underline">{email}</a></p>}
+      {phones.length > 0 && (
+        <ul class="mt-2 space-y-1">
+          {phones.map(p => <li><a href={`tel:${p.replace(/\s+/g,'')}`} class="hover:underline">{p}</a></li>)}
+        </ul>
+      )}
+    </div>
+    <div>
+      <p class="font-semibold">Suivre</p>
+      <ul class="mt-2 space-y-1">
+        {social.map(s => <li><a class="text-text-muted hover:underline" href={s.href} target="_blank" rel="noopener">{s.label}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <p class="font-semibold">Légal</p>
+      <ul class="mt-2 space-y-1">
+        {legalLinks.map(l => <li><a class="text-text-muted hover:underline" href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+  </div>
+  <div class="text-center text-xs text-text-muted pb-8">© {new Date().getFullYear()} Julien Jeangirard — Tous droits réservés.</div>
+</footer>

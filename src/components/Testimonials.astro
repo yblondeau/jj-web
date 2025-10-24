@@ -1,0 +1,10 @@
+---
+import Testimonial from './Testimonial.astro';
+interface T { quote: string; author?: string; role?: string }
+interface Props { items: T[]; sourceLink?: string }
+const { items, sourceLink } = Astro.props as Props;
+---
+<div class="grid md:grid-cols-3 gap-6">
+  {items.map(t => <Testimonial {...t} />)}
+</div>
+{sourceLink && <p class="text-sm text-text-muted mt-4"><a class="underline" href={sourceLink} target="_blank" rel="noopener">Voir plus d’avis</a></p>}

@@ -1,0 +1,14 @@
+---
+interface Props {
+  title: string; description: string; url?: string; image?: string;
+}
+const { title, description, url = 'https://www.julienjeangirard-coaching.fr', image = '/images/og-image.jpg' } = Astro.props as Props;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={image} />
+<meta name="twitter:card" content="summary_large_image" />

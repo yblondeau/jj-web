@@ -1,0 +1,31 @@
+---
+interface CTA { label: string; href: string }
+interface Props {
+  title: string; subtitle?: string; bullets?: string[];
+  primaryCta: CTA; secondaryCta?: CTA;
+  imageSrc?: string; imageAlt?: string;
+}
+const { title, subtitle, bullets = [], primaryCta, secondaryCta, imageSrc = '/images/placeholder-hero.jpg', imageAlt = 'Illustration de concentration et performance' } = Astro.props as Props;
+---
+
+<section id="hero" class="relative overflow-clip">
+  <div class="container grid lg:grid-cols-2 gap-10 items-center py-16">
+    <div class="animate-fadeUp">
+      <h1 class="text-4xl md:text-5xl font-semibold leading-tight">{title}</h1>
+      {subtitle && <p class="text-text-muted mt-4 text-lg">{subtitle}</p>}
+      {bullets.length > 0 && (
+        <ul class="mt-6 grid gap-2">
+          {bullets.map(b => <li class="before:content-['•'] before:text-[color:var(--accent)] before:mr-2">{b}</li>)}
+        </ul>
+      )}
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={primaryCta.href} class="rounded-lg px-5 py-3 bg-[color:var(--accent)] text-black font-medium shadow-soft hover:opacity-90">{primaryCta.label}</a>
+        {secondaryCta && <a href={secondaryCta.href} class="rounded-lg px-5 py-3 border border-white/10 hover:bg-white/5">{secondaryCta.label}</a>}
+      </div>
+      <p class="mt-4 text-sm text-text-muted">Pontarlier • Doubs • Suisse voisine (Besançon → Lausanne, Morteau, Yverdon, Haut-Jura) • Présentiel & visio</p>
+    </div>
+    <div class="rounded-xl overflow-hidden border border-white/10 shadow-soft">
+      <img src={imageSrc} alt={imageAlt} loading="eager" width="1200" height="900" />
+    </div>
+  </div>
+</section>

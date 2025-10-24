@@ -1,0 +1,8 @@
+---
+interface Props { question: string; answer: string; defaultOpen?: boolean }
+const { question, answer, defaultOpen = false } = Astro.props as Props;
+---
+<details class="bg-surface/70 border border-white/10 rounded-xl p-4" {...(defaultOpen ? { open: true } : {})}>
+  <summary class="cursor-pointer font-medium">{question}</summary>
+  <div class="mt-2 text-text-muted">{answer}</div>
+</details>

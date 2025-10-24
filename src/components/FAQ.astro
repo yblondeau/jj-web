@@ -1,0 +1,9 @@
+---
+import FAQItem from "./FAQItem.astro";
+interface Item { question: string; answer: string; defaultOpen?: boolean }
+interface Props { items: Item[] }
+const { items } = Astro.props as Props;
+---
+<div class="grid gap-3">
+  {items.map(i => <FAQItem {...i} />)}
+</div>

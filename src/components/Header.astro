@@ -1,0 +1,20 @@
+---
+interface Link { label: string; href: string }
+interface Props {
+  links: Link[];
+  ctaLabel?: string; ctaHref?: string; sticky?: boolean;
+}
+const { links, ctaLabel = 'Réserver un appel', ctaHref = '#contact', sticky = true } = Astro.props as Props;
+---
+
+<header class={`w-full ${sticky ? 'sticky top-0 z-50' : ''} backdrop-blur bg-bg/70 border-b border-white/5`}>
+  <nav class="container flex items-center justify-between h-16" aria-label="Navigation principale">
+    <a href="/" class="font-semibold tracking-wide text-text hover:text-white focus-visible:outline-none">Julien Jeangirard</a>
+    <ul class="hidden md:flex gap-6">
+      {links.map((l) => (
+        <li><a class="text-text-muted hover:text-white" href={l.href}>{l.label}</a></li>
+      ))}
+    </ul>
+    <a href={ctaHref} class="inline-flex items-center rounded-lg px-4 py-2 bg-[color:var(--accent)] text-black font-medium hover:opacity-90 focus-visible:outline-none"> {ctaLabel} </a>
+  </nav>
+</header>
