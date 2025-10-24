@@ -1,13 +1,13 @@
 ---
-interface Link { label: string; href: string }
+import type { NavLink } from '../data/nav';
 interface Props {
-  links: Link[];
+  links: NavLink[];
   ctaLabel?: string; ctaHref?: string; sticky?: boolean;
 }
-const { links, ctaLabel = 'Réserver un appel', ctaHref = '#contact', sticky = true } = Astro.props as Props;
+const { links, ctaLabel = 'Réserver un appel', ctaHref = '/contact', sticky = true } = Astro.props as Props;
 ---
 
-<header class={`w-full ${sticky ? 'sticky top-0 z-50' : ''} backdrop-blur bg-bg/70 border-b border-white/5`}>
+<header class={`w-full fixed top-0 left-0 right-0 z-50 backdrop-blur bg-bg/85 border-b border-white/10`}>
   <nav class="container flex items-center justify-between h-16" aria-label="Navigation principale">
     <a href="/" class="font-semibold tracking-wide text-text hover:text-white focus-visible:outline-none">Julien Jeangirard</a>
     <ul class="hidden md:flex gap-6">

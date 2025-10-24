@@ -1,5 +1,10 @@
 ---
-const { title = 'Julien Jeangirard Coaching', description = 'Préparation mentale, coaching de vie et coaching en entreprise — Pontarlier, Doubs & Suisse voisine.', url = 'https://www.julienjeangirard-coaching.fr', image = '/images/og-image.jpg' } = Astro.props;
+const {
+  title = "Julien Jeangirard Coaching",
+  description = "Préparation mentale, coaching de vie et coaching en entreprise — Pontarlier, Doubs & Suisse voisine.",
+  url = "https://www.julienjeangirard-coaching.fr",
+  image = "/images/og-image.jpg",
+} = Astro.props;
 ---
 
 <html lang="fr" class="scroll-smooth">
@@ -19,21 +24,60 @@ const { title = 'Julien Jeangirard Coaching', description = 'Préparation mental
     <meta property="og:url" content={url} />
     <meta name="twitter:card" content="summary_large_image" />
     <style is:global>
-      :root{
-        --bg:#0B0E11; --surface:#11151A;
-        --text:#E5E7EB; --text-muted:#B6BDC6;
-        --accent:#E3FF04;
-        --success:#22C55E; --warning:#F59E0B; --error:#EF4444;
-        --r-lg:16px; --r-xl:24px;
+      :root {
+        /* Fond & surfaces : ~+8 à +12% de luminosité vs version initiale */
+        --bg: #102338; /* avant: #0B0E11 */
+        --surface: #1b2430; /* avant: #11151A */
+
+        /* Texte : légèrement plus clair pour conserver le contraste AA */
+        --text: #f1f5f9; /* avant: #E5E7EB */
+        --text-muted: #c7d0db; /* avant: #B6BDC6 */
+
+        /* Accent inchangé (modifiable au besoin) */
+        --accent: #e3ff04; /* avant: #34d399 */
+
+        --success: #22c55e;
+        --warning: #f59e0b;
+        --error: #ef4444;
+
+        /* Tokens */
+        --r-lg: 16px;
+        --r-xl: 24px;
+
+        /* Hauteur header pour calculs d’offset */
+        --header-h: 4.4rem; /* h-16 */
       }
-      html,body{height:100%}
-      body{background:var(--bg); color:var(--text);}
-      .container{max-width:1200px; margin:0 auto; padding:0 1rem;}
-      @media (prefers-reduced-motion: reduce){
-        *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        /* Laisse de la place sous le header fixe */
+        padding-top: var(--header-h);
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+          scroll-behavior: auto !important;
+        }
       }
       /* Focus visible */
-      :focus-visible{outline:3px solid var(--accent); outline-offset:3px; border-radius:8px}
+      :focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 8px;
+      }
+      /* Quand on navigue par ancre, éviter que le header masque le titre */
+      :where(section[id], h2[id], h3[id]){ scroll-margin-top: calc(var(--header-h) + 0.5rem); }
     </style>
   </head>
   <body class="min-h-dvh antialiased">
