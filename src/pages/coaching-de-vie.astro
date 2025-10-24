@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SEO from '../components/SEO.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Header from '../components/Header.astro';
+import { nav } from '../data/nav';
+
+const testimonials = [
+  { quote: 'Ce travail m’a permis de retrouver de l’énergie et de faire des choix que je repoussais depuis des années.', author: 'Julien', role: '44 ans' },
+  { quote: 'Je me suis reconnectée à mes envies profondes. J’ai appris à me faire passer en priorité, sans culpabiliser.', author: 'Amel', role: '38 ans' },
+  { quote: 'Je ne savais pas trop pourquoi je venais… et j’en ressors transformé. Plus aligné, plus clair. Merci.', author: 'Thomas', role: '51 ans' }
+];
+---
+
+<BaseLayout
+  title='Coaching de vie — clarté, confiance et alignement | Julien Jeangirard'
+  description="Et si c'était le bon moment pour vous recentrer sur l’essentiel ? Coaching de vie & PNL pour clarifier, agir et retrouver l’élan. Présentiel & visio — Pontarlier, Doubs & Suisse voisine."
+>
+  <SEO
+    title='Coaching de vie — clarté, confiance et alignement | Julien Jeangirard'
+    description="(Re)prendre sa place, se reconnecter à soi, ouvrir un nouveau chapitre. Séance découverte offerte."
+  />
+  <SchemaOrg type="Service" data={{
+    name: 'Coaching de vie',
+    provider: { '@type':'Person', name: 'Julien Jeangirard' },
+    areaServed: ['Pontarlier','Besançon','Lausanne','Morteau','Yverdon-les-Bains','Haut-Jura'],
+    serviceType: 'Life Coaching',
+    offers: { '@type': 'Offer', availability: 'https://schema.org/InStock' },
+    url: 'https://www.julienjeangirard-coaching.fr/coaching-de-vie'
+  }} />
+  <SchemaOrg type="BreadcrumbList" data={{
+    itemListElement: [
+      { '@type':'ListItem', position: 1, name: 'Accueil', item: 'https://www.julienjeangirard-coaching.fr' },
+      { '@type':'ListItem', position: 2, name: 'Coaching de vie', item: 'https://www.julienjeangirard-coaching.fr/coaching-de-vie' }
+    ]
+  }} />
+
+  <!-- Header global -->
+  <Header links={nav} ctaLabel="Réserver un appel" ctaHref="/contact" />
+
+  <!-- HERO -->
+  <section class="relative overflow-clip">
+    <div class="container grid lg:grid-cols-2 gap-10 items-center py-16">
+      <div class="animate-fadeUp">
+        <p class="text-[color:var(--accent)] tracking-wide uppercase text-xs">Coaching de vie</p>
+        <h1 class="text-4xl md:text-5xl font-semibold leading-tight mt-2">
+          Et si c’était le bon moment pour vous recentrer sur l’essentiel ?
+        </h1>
+        <p class="text-text-muted mt-4 text-lg">
+          (Re)prendre votre place. Vous reconnecter à vous. Ouvrir un nouveau chapitre — avec clarté, confiance et simplicité.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/contact" class="rounded-lg px-5 py-3 bg-[color:var(--accent)] text-black font-medium shadow-soft hover:opacity-90">Réserver ma séance découverte</a>
+          <a href="/#preuves" class="rounded-lg px-5 py-3 border border-white/15 hover:bg-white/5">Voir des témoignages</a>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-white/15 shadow-soft">
+        <img src="/images/placeholder-service.jpg" alt="Visuel évocateur de recentrage et de clarté personnelle" loading="lazy" width="1200" height="900" />
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO EMOTIONNELLE -->
+  <section id="introduction" class="container py-12">
+    <div class="bg-surface/90 border border-white/15 rounded-xl p-6">
+      <p class="text-text-muted">
+        Vous avez construit votre vie en avançant au rythme des obligations, des attentes, des choix raisonnables.
+        Profession, responsabilités, famille, quotidien… Vous avez fait au mieux.
+        Mais aujourd’hui, une question revient, plus insistante :
+        <strong class="text-white">« Où suis-je dans tout ça ? »</strong>
+      </p>
+      <p class="text-text-muted mt-4">
+        Un flou intérieur. Une sensation de vide, ou l’impression de tourner en rond. Peut-être même un appel silencieux à
+        <strong class="text-white">changer, évoluer, reprendre le fil de votre histoire personnelle</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- CE QUE VOUS RESSENTEZ -->
+  <section id="ressenti" class="container py-12">
+    <SectionTitle eyebrow="Reconnaître ce qui se joue" title="Ce que vous ressentez" subtitle="Connexion universelle au vécu" />
+    <div class="grid lg:grid-cols-2 gap-8">
+      <ul class="bg-surface/90 border border-white/15 rounded-xl p-6 space-y-3">
+        <li>Un <strong>décalage</strong> entre la vie que vous menez et celle que vous aimeriez vivre.</li>
+        <li>L’impression de ne plus savoir vraiment <strong>ce que vous voulez</strong>.</li>
+        <li>Un manque d’élan, de <strong>clarté</strong>, parfois de sens.</li>
+        <li>Des doutes sur vos capacités, vos choix, ou votre <strong>légitimité</strong> à vouloir « autre chose ».</li>
+        <li>Et en même temps, une envie persistante : <strong>évoluer, vous retrouver, exister pleinement</strong>.</li>
+      </ul>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-6">
+        <h3 class="text-xl font-semibold">Bonne nouvelle</h3>
+        <p class="text-text-muted mt-2">
+          Ce que vous traversez est normal — et c’est souvent le signe qu’une phase importante de clarification est prête à émerger.
+        </p>
+        <p class="text-text-muted mt-2">
+          Le coaching de vie offre un cadre sûr et concret pour passer de la confusion à l’action alignée.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION INSPIRANTE -->
+  <section id="vision" class="container py-12">
+    <SectionTitle eyebrow="Projection" title="Ce que vous pourriez vivre" subtitle="Une vision inspirante et réaliste" />
+    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4 text-center">✨ Avancer avec <strong>confiance</strong> et <strong>cohérence</strong>.</div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4 text-center">✨ Comprendre ce qui <strong>vous freine</strong> — et comment le dépasser.</div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4 text-center">✨ Vous reconnecter à ce qui est <strong>vraiment important</strong>.</div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4 text-center">✨ Retrouver de l’<strong>élan</strong>, de la motivation, du <strong>plaisir</strong>.</div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4 text-center">✨ Oser prendre votre <strong>juste place</strong> dans votre vie.</div>
+    </div>
+    <p class="container mt-6 text-text-muted">
+      Ce changement est possible. Et tout commence par un <strong class="text-white">premier pas vers vous-même</strong>.
+    </p>
+  </section>
+
+  <!-- PROPOSITION D'ACCOMPAGNEMENT -->
+  <section id="proposition" class="container py-12">
+    <SectionTitle eyebrow="Ce que je vous propose" title="Un accompagnement sur mesure" subtitle="Coaching de vie & PNL — bienveillance, clarté, action" />
+    <div class="grid lg:grid-cols-2 gap-8">
+      <ul class="bg-surface/90 border border-white/15 rounded-xl p-6 space-y-2">
+        <li>✔ Faire le point sur ce que vous vivez</li>
+        <li>✔ Clarifier vos besoins, vos désirs, vos blocages</li>
+        <li>✔ Retrouver vos ressources intérieures</li>
+        <li>✔ Changer vos schémas de pensée limitants</li>
+        <li>✔ Passer à l’action, en cohérence avec vous-même</li>
+        <li>✔ Créer une vie plus alignée, plus sereine, plus vivante</li>
+      </ul>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-6">
+        <h3 class="text-xl font-semibold">Concrètement, comment ?</h3>
+        <p class="text-text-muted mt-2">
+          Séances de 60–75 min, en présentiel (Pontarlier, Doubs & Suisse voisine) ou en visio. Rythme adapté à votre objectif.
+        </p>
+        <p class="text-text-muted mt-2">
+          Outils mobilisés : coaching, PNL, exercices personnalisés, routines et suivis entre séances si utile.
+        </p>
+        <a href="/contact" class="mt-4 inline-block rounded-lg px-5 py-3 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">Réserver ma séance découverte</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MON APPROCHE -->
+  <section id="approche" class="container py-12">
+    <SectionTitle eyebrow="Ma façon de travailler" title="Mon approche" />
+    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4"><strong>Écoute active</strong> — Accueillir sans jugement.</div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4"><strong>Clarté</strong> — Voir plus clair à chaque étape.</div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4"><strong>Outils concrets</strong> — Coaching, PNL, exercices.</div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4"><strong>Engagement commun</strong> — Avancer côte à côte.</div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4"><strong>Résultats durables</strong> — Ancrer la transformation.</div>
+    </div>
+  </section>
+
+  <!-- OFFRE DECOUVERTE -->
+  <section id="decouverte" class="container py-12">
+    <div class="bg-surface/90 border border-white/15 rounded-xl p-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-semibold">Envie de commencer ?</h2>
+      <p class="text-text-muted mt-2">
+        🎁 <strong class="text-white">Première séance découverte offerte</strong> — faisons le point ensemble et vérifions l’adéquation de l’accompagnement.
+      </p>
+      <a href="/contact" class="mt-6 inline-block rounded-lg px-6 py-3 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">
+        Réserver ma séance découverte
+      </a>
+    </div>
+  </section>
+
+  <!-- TEMOIGNAGES -->
+  <section id="temoignages" class="container py-12">
+    <SectionTitle eyebrow="Preuves" title="Ils / Elles témoignent…" />
+    <Testimonials items={testimonials} />
+  </section>
+
+  <!-- CONCLUSION -->
+  <section id="conclusion" class="container py-16">
+    <div class="bg-surface/90 border border-white/15 rounded-xl p-8 text-center">
+      <p class="text-lg">
+        Il n’y a pas d’âge, ni de bon moment pour commencer à se choisir.
+        Il suffit d’une envie sincère de changement — et d’un accompagnement adapté.
+      </p>
+      <p class="text-text-muted mt-3">
+        <strong class="text-white">Vous avez le droit d’évoluer.</strong> Vous avez le droit de vivre une vie qui vous ressemble.
+      </p>
+      <a href="/contact" class="mt-6 inline-block rounded-lg px-6 py-3 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">
+        Réserver ma séance découverte
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SEO from '../components/SEO.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Testimonials from '../components/Testimonials.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import Header from '../components/Header.astro';
+import { nav } from '../data/nav';
+
+const steps = [
+  { title: 'Cartographier', text: 'Comprendre votre contexte, identifier les tensions, clarifier objectifs & indicateurs.' },
+  { title: 'Intervenir', text: 'Ateliers collectifs, entraînement à la communication, gestion du stress, rôles & rituels.' },
+  { title: 'Ancrer', text: 'Plan d’actions, feedbacks, coaching individuel optionnel, suivi à froid.' }
+];
+
+const testimonials = [
+  { quote: 'En 2 ateliers, nous avons dénoué des tensions installées. Le cadre est simple et efficace.', author: 'C. Martin', role: 'Dirigeante, retail' },
+  { quote: 'L’équipe a retrouvé des rituels clairs, plus de coopération et moins de frictions au quotidien.', author: 'R. Duval', role: 'Manager, TPE services' }
+];
+---
+
+<BaseLayout
+  title="Coaching en entreprise — cohésion, motivation, communication | Julien Jeangirard"
+  description="Développer le potentiel humain de votre équipe : cohésion, motivation, confiance et gestion des tensions. Ateliers collectifs & coaching individuel — Doubs & Suisse voisine."
+>
+  <SEO
+    title="Coaching en entreprise — cohésion, motivation, communication | Julien Jeangirard"
+    description="Interventions ciblées pour mieux fonctionner ensemble, prévenir les conflits et soutenir la performance. Présentiel & visio."
+  />
+  <SchemaOrg type="Service" data={{
+    name: 'Coaching en entreprise',
+    provider: { '@type':'Person', name: 'Julien Jeangirard' },
+    areaServed: ['Pontarlier','Besançon','Lausanne','Morteau','Yverdon-les-Bains','Haut-Jura'],
+    audience: ['Business','Organization','Manager'],
+    serviceType: 'Team Coaching',
+    offers: { '@type': 'Offer', availability: 'https://schema.org/InStock' },
+    url: 'https://www.julienjeangirard-coaching.fr/coaching-en-entreprise'
+  }} />
+  <SchemaOrg type="BreadcrumbList" data={{
+    itemListElement: [
+      { '@type':'ListItem', position: 1, name: 'Accueil', item: 'https://www.julienjeangirard-coaching.fr' },
+      { '@type':'ListItem', position: 2, name: 'Coaching en entreprise', item: 'https://www.julienjeangirard-coaching.fr/coaching-en-entreprise' }
+    ]
+  }} />
+
+  <!-- Header global -->
+  <Header links={nav} ctaLabel="Prendre contact" ctaHref="/contact" />
+
+  <!-- HERO -->
+  <section class="relative overflow-clip">
+    <div class="container grid lg:grid-cols-2 gap-10 items-center py-16">
+      <div class="animate-fadeUp">
+        <p class="text-[color:var(--accent)] tracking-wide uppercase text-xs">Pour les entreprises</p>
+        <h1 class="text-4xl md:text-5xl font-semibold leading-tight mt-2">
+          Coaching en entreprise : développer le potentiel humain de votre équipe
+        </h1>
+        <p class="text-text-muted mt-4 text-lg">
+          La performance durable repose sur la cohésion, la motivation, la confiance et la capacité à gérer les tensions.
+          Mes interventions aident vos équipes à <strong class="text-white">mieux fonctionner ensemble</strong> et vos managers à
+          <strong class="text-white">soutenir la performance</strong> dans un climat serein.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/contact" class="rounded-lg px-5 py-3 bg-[color:var(--accent)] text-black font-medium shadow-soft hover:opacity-90">Échanger sur votre besoin</a>
+          <a href="/#preuves" class="rounded-lg px-5 py-3 border border-white/15 hover:bg-white/5">Voir des retours</a>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-white/15 shadow-soft">
+        <img src="/images/placeholder-service.jpg" alt="Équipe en atelier de cohésion et communication" loading="lazy" width="1200" height="900" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ENJEUX -->
+  <section id="enjeux" class="container py-12">
+    <SectionTitle eyebrow="Vos enjeux" title="Dirigeants & managers : vos priorités" subtitle="Ce qui fait la différence au quotidien" />
+    <div class="grid lg:grid-cols-2 gap-8">
+      <ul class="bg-surface/90 border border-white/15 rounded-xl p-6 space-y-3">
+        <li>Améliorer la <strong>communication</strong> au sein de l’équipe.</li>
+        <li>Prévenir ou gérer les <strong>conflits</strong> internes.</li>
+        <li>Stimuler la <strong>motivation</strong> et l’implication au travail.</li>
+        <li>Favoriser la <strong>confiance</strong>, la solidarité, l’entraide.</li>
+        <li>Mieux gérer le <strong>stress</strong> (charge de travail, relation client).</li>
+        <li>Accompagner les <strong>changements</strong> (projet, réorganisation, pression accrue).</li>
+      </ul>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-6">
+        <h3 class="text-xl font-semibold">Un cadre simple et pragmatique</h3>
+        <p class="text-text-muted mt-2">
+          Inspiré du sport de haut niveau et du coaching individuel, adapté à la réalité du terrain : TPE, commerces,
+          artisans, instituts, services…
+        </p>
+        <p class="text-text-muted mt-2">
+          Objectif : des <strong class="text-white">comportements concrets</strong> qui améliorent la qualité de
+          collaboration et les résultats.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROCHE -->
+  <section id="approche" class="container py-12">
+    <SectionTitle eyebrow="Méthode" title="Mon approche" subtitle="Combiner mental, communication et rituels d’équipe" />
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4"><strong>Préparation mentale</strong> appliquée à l’entreprise (concentration, émotions, motivation).</div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4"><strong>PNL</strong> : outils concrets pour la communication & les relations.</div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4"><strong>Coaching collectif</strong> : exercices de cohésion, écoute active, coopération.</div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-4"><strong>Coaching individuel</strong> (option) pour managers/collaborateurs.</div>
+    </div>
+
+    <div class="mt-10">
+      <ProcessSteps steps={steps} />
+    </div>
+  </section>
+
+  <!-- FORMATS -->
+  <section id="formats" class="container py-12">
+    <SectionTitle eyebrow="Formats d’intervention" title="Ateliers & programmes sur-mesure" subtitle="Présentiel dans vos locaux, visio possible" />
+    <div class="grid lg:grid-cols-3 gap-6">
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-6">
+        <h3 class="text-xl font-semibold">Ateliers collectifs</h3>
+        <p class="text-text-muted mt-2">1h30 à 3h, focus sur un besoin précis. Concrets, participatifs, immédiatement applicables.</p>
+      </div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-6">
+        <h3 class="text-xl font-semibold">Programmes sur-mesure</h3>
+        <p class="text-text-muted mt-2">Séquence d’ateliers + accompagnement entre les sessions sur quelques semaines ou de façon ponctuelle.</p>
+      </div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-6">
+        <h3 class="text-xl font-semibold">Coaching individuel (option)</h3>
+        <p class="text-text-muted mt-2">Pour accompagner un manager ou un collaborateur en difficulté ou en montée en compétences.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THEMATIQUES -->
+  <section id="thematiques" class="container py-12">
+    <SectionTitle eyebrow="Exemples de thématiques" title="Ce que nous travaillons en priorité" />
+    <div class="grid md:grid-cols-2 gap-6">
+      <ul class="bg-surface/90 border border-white/15 rounded-xl p-6 space-y-2">
+        <li>Mieux communiquer dans l’équipe.</li>
+        <li>Gérer le stress et les émotions en situation tendue.</li>
+        <li>Sortir des tensions ou non-dits.</li>
+      </ul>
+      <ul class="bg-surface/90 border border-white/15 rounded-xl p-6 space-y-2">
+        <li>Renforcer la dynamique d’équipe et l’engagement.</li>
+        <li>Relancer la motivation lors des baisses d’énergie.</li>
+        <li>Renforcer la posture professionnelle face aux clients.</li>
+      </ul>
+    </div>
+    <p class="text-text-muted mt-6">
+      <strong class="text-white">Dirigeants de TPE, commerces, artisans, instituts :</strong> une approche simple, humaine et adaptée à votre réalité.
+    </p>
+  </section>
+
+  <!-- PREUVES -->
+  <section id="preuves" class="container py-12">
+    <SectionTitle eyebrow="Preuves" title="Ce que disent nos clients" />
+    <Testimonials items={testimonials} />
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="contact" class="container py-16">
+    <div class="bg-surface/90 border border-white/15 rounded-xl p-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-semibold">Vous souhaitez en savoir plus ?</h2>
+      <p class="text-text-muted mt-2">
+        Contactez-moi pour échanger sur vos besoins spécifiques. Je vous proposerai une première intervention ciblée,
+        <strong class="text-white">sans engagement</strong>, pour vous faire une idée.
+      </p>
+      <a href="/contact" class="mt-6 inline-block rounded-lg px-6 py-3 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">Prendre contact</a>
+    </div>
+  </section>
+</BaseLayout>

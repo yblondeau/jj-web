@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SEO from '../components/SEO.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import Testimonials from '../components/Testimonials.astro';
+
+const steps = [
+  { title: 'Diagnostiquer', text: 'Comprendre votre discipline, vos enjeux (compétition, scène) et vos blocages : stress, routine, focus, identité.' },
+  { title: 'Entraîner', text: 'Exercices ciblés (respiration, routines, imagerie, attention), mises en situation et suivi entre séances.' },
+  { title: 'Ancrer', text: 'Stabiliser les acquis, plan d’autonomie, préparation aux imprévus et protocoles jour J.' }
+];
+
+const services = [
+  {
+    title: 'Starter — Bases mentales',
+    summary: 'Installer rapidement des fondamentaux : objectifs, respiration, routine pré-perf.',
+    benefits: ['Objectif clair (SMART) court/moyen terme', 'Routine pré-compétition ou pré-scène', 'Premiers outils anti-stress'],
+    deliverables: ['3 séances individuelles', 'Fiches outils', 'Plan 4 semaines'],
+    badge: 'Sport & Musique',
+    cta: { label: 'Parler de votre objectif', href: '/contact' }
+  },
+  {
+    title: 'Performance — Compétition/Scène',
+    summary: 'Gérer la pression et performer avec régularité les jours qui comptent.',
+    benefits: ['Gestion du stress et des émotions', 'Focus & lucidité en situation', 'Débriefs orientés progrès'],
+    deliverables: ['6 séances', 'Checklist jour J', 'Support asynchrone léger'],
+    badge: 'Compétition',
+    cta: { label: 'Réserver un appel', href: '/contact' }
+  },
+  {
+    title: 'Retour & relance',
+    summary: 'Revenir après blessure/échec et retrouver le plaisir d’entraîner.',
+    benefits: ['Reconstruction de la confiance', 'Narratif et identité aidants', 'Routines anti-lassitude'],
+    deliverables: ['4 séances', 'Journal de reprise', 'Coordination staff si besoin'],
+    badge: 'Reprise',
+    cta: { label: 'Demander un devis', href: '/contact' }
+  }
+];
+
+const testimonials = [
+  { quote: 'Avant chaque finale je tremblais. Les routines et la respiration m’ont rendu lucide, je retrouve du plaisir.', author: 'Élise', role: 'Sprinteuse' },
+  { quote: 'Avant un récital je me sabotais. On a travaillé le discours interne et l’imagerie : j’entre sur scène avec calme.', author: 'Mathieu', role: 'Pianiste' }
+];
+
+const faq = [
+  { question: 'Pour qui est la préparation mentale ?', answer: 'Sportifs (amateurs à haut niveau) et musiciens/scéniciens. Le travail s’adapte à votre calendrier (compétitions, concerts, examens).' },
+  { question: 'Visio ou présentiel ?', answer: 'Les deux. Présentiel autour de Pontarlier/Doubs & Suisse voisine (Besançon → Lausanne), sinon visio.' },
+  { question: 'Combien de temps pour voir un effet ?', answer: 'Dès 3 à 6 séances on constate généralement une meilleure gestion du stress et des routines plus fiables. Le maintien dépend de la pratique entre séances.' },
+  { question: 'Et si j’ai une compétition imminente ?', answer: 'On peut faire un focus “jour J” (respiration, intention, checklists). Ensuite, on consolide pour la saison.' }
+];
+---
+
+<BaseLayout title="Préparation mentale — Sportifs & musiciens | Julien Jeangirard"
+  description="Gestion du stress, objectifs, confiance, routines et concentration pour sportifs et musiciens. Pontarlier, Doubs & Suisse voisine — présentiel & visio.">
+  <SEO title="Préparation mentale — Sportifs & musiciens | Julien Jeangirard"
+       description="Atteignez votre meilleur niveau : gestion du stress, confiance, objectifs, routines, concentration. Présentiel & visio." />
+  <SchemaOrg type="Service" data={{
+    name: 'Préparation mentale',
+    provider: { '@type':'Person', name: 'Julien Jeangirard' },
+    areaServed: ['Pontarlier','Besançon','Lausanne','Morteau','Yverdon-les-Bains','Haut-Jura'],
+    audience: ['Athletes','Musicians'],
+    offers: { '@type': 'Offer', availability: 'https://schema.org/InStock' },
+    url: 'https://www.julienjeangirard-coaching.fr/preparation-mentale'
+  }} />
+
+  <!-- HERO -->
+  <section class="relative overflow-clip">
+    <div class="container grid lg:grid-cols-2 gap-10 items-center py-16">
+      <div class="animate-fadeUp">
+        <h1 class="text-4xl md:text-5xl font-semibold leading-tight">
+          Préparation mentale — performer sereinement
+        </h1>
+        <p class="text-text-muted mt-4 text-lg">
+          Sportifs & musiciens : gérez la pression, restez lucide et retrouvez le plaisir d’entrer en performance.
+        </p>
+        <ul class="mt-6 grid gap-2">
+          <li class="before:content-['•'] before:text-[color:var(--accent)] before:mr-2">Objectifs précis et motivants</li>
+          <li class="before:content-['•'] before:text-[color:var(--accent)] before:mr-2">Routines fiables avant et pendant l’effort</li>
+          <li class="before:content-['•'] before:text-[color:var(--accent)] before:mr-2">Confiance & focus les jours importants</li>
+        </ul>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/contact" class="rounded-lg px-5 py-3 bg-[color:var(--accent)] text-black font-medium shadow-soft hover:opacity-90">Réserver un appel</a>
+          <a href="/#preuves" class="rounded-lg px-5 py-3 border border-white/15 hover:bg-white/5">Voir des retours</a>
+        </div>
+        <p class="mt-4 text-sm text-text-muted">Pontarlier • Doubs • Suisse voisine • Présentiel & visio</p>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-white/15 shadow-soft">
+        <img src="/images/placeholder-service.jpg" alt="Athlète et musicien se concentrant avant la performance" loading="lazy" width="1200" height="900" />
+      </div>
+    </div>
+  </section>
+
+  <!-- POUR QUI / BESOINS -->
+  <section class="container py-12">
+    <SectionTitle eyebrow="Pour qui ?" title="Sportifs et musiciens en quête de performance" subtitle="Des besoins récurrents, quel que soit le niveau." />
+    <div class="grid lg:grid-cols-2 gap-8">
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-6">
+        <h3 class="text-xl font-semibold">Besoins fréquents</h3>
+        <ul class="mt-4 space-y-2">
+          <li><strong>Gestion du stress & pression</strong> : nervosité avant compétition/scène, perte de lucidité, peur de décevoir.</li>
+          <li><strong>Objectifs</strong> : objectifs vagues/irréalistes, démotivation après échec/blessure.</li>
+          <li><strong>Confiance</strong> : doutes, comparaisons, discours interne négatif, imposteur.</li>
+          <li><strong>Routine & monotonie</strong> : lassitude, perte de plaisir, risque de burnout mental.</li>
+          <li><strong>Peur de l’échec / réussite</strong> : paralysie mentale, auto-sabotage, difficulté à assumer ses victoires.</li>
+          <li><strong>Récupération mentale</strong> : difficulté à “déconnecter” après l’effort.</li>
+          <li><strong>Concentration</strong> : distractibilité, pensées parasites, oubli des consignes.</li>
+        </ul>
+      </div>
+      <div class="bg-surface/90 border border-white/15 rounded-xl p-6">
+        <h3 class="text-xl font-semibold">Ce que nous travaillons</h3>
+        <ul class="mt-4 space-y-2">
+          <li>Objectifs clairs (SMART) court/moyen/long terme.</li>
+          <li>Confiance : feedback, auto-évaluation, discours positif.</li>
+          <li>Gestion des émotions et du stress (respiration, routines).</li>
+          <li>Identité, croyances, valeurs — narration aidante.</li>
+          <li>Attention & présence : focus, ancrages, imagerie mentale.</li>
+          <li>Motivation durable et plaisir d’entraîner.</li>
+          <li>Cohésion d’équipe : communication simple, dynamique positive.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHODE -->
+  <section class="container py-12">
+    <SectionTitle eyebrow="Méthode" title="Simple, concrète, mesurable" subtitle="Un cadre clair pour progresser et tenir dans la durée." />
+    <ProcessSteps steps={steps} />
+  </section>
+
+  <!-- FORMATS -->
+  <section class="container py-12">
+    <SectionTitle eyebrow="Formats" title="Choisissez le bon point d’entrée" subtitle="Les contenus s’adaptent à votre calendrier (compétitions, scènes, examens)." />
+    <ServicesGrid items={services} />
+  </section>
+
+  <!-- PREUVES -->
+  <section class="container py-12">
+    <SectionTitle eyebrow="Preuves" title="Ce qui change concrètement" subtitle="Des retours courts, orientés résultats." />
+    <Testimonials items={testimonials} />
+  </section>
+
+  <!-- FAQ -->
+  <section class="container py-12">
+    <SectionTitle eyebrow="FAQ" title="Questions fréquentes" />
+    <div class="grid gap-3">
+      {faq.map(item => (
+        <details class="bg-surface/90 border border-white/15 rounded-xl p-4">
+          <summary class="cursor-pointer font-medium">{item.question}</summary>
+          <div class="mt-2 text-text-muted">{item.answer}</div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="container py-16">
+    <div class="bg-surface/90 border border-white/15 rounded-xl p-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-semibold">Prêt·e à entrer en performance sereine ?</h2>
+      <p class="text-text-muted mt-2">Expliquez votre contexte en 2 minutes, nous cadrons le meilleur format.</p>
+      <a href="/contact" class="mt-6 inline-block rounded-lg px-6 py-3 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">Réserver un appel</a>
+    </div>
+  </section>
+</BaseLayout>
