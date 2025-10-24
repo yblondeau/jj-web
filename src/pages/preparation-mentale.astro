@@ -6,6 +6,8 @@ import SectionTitle from '../components/SectionTitle.astro';
 import ServicesGrid from '../components/ServicesGrid.astro';
 import ProcessSteps from '../components/ProcessSteps.astro';
 import Testimonials from '../components/Testimonials.astro';
+import Header from '../components/Header.astro';
+import { nav } from '../data/nav';
 
 const steps = [
   { title: 'Diagnostiquer', text: 'Comprendre votre discipline, vos enjeux (compétition, scène) et vos blocages : stress, routine, focus, identité.' },
@@ -65,6 +67,9 @@ const faq = [
     offers: { '@type': 'Offer', availability: 'https://schema.org/InStock' },
     url: 'https://www.julienjeangirard-coaching.fr/preparation-mentale'
   }} />
+
+  <!-- Header global -->
+  <Header links={nav} ctaLabel="Réserver un appel" ctaHref="/contact" />
 
   <!-- HERO -->
   <section class="relative overflow-clip">
