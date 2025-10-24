@@ -25,16 +25,17 @@ const {
     <meta name="twitter:card" content="summary_large_image" />
     <style is:global>
       :root {
-        /* Fond & surfaces : ~+8 à +12% de luminosité vs version initiale */
-        --bg: #102338; /* avant: #0B0E11 */
-        --surface: #1b2430; /* avant: #11151A */
+        /* Fond & surfaces : */
+        --bg: #272727;
+        --surface: #898952;
 
-        /* Texte : légèrement plus clair pour conserver le contraste AA */
-        --text: #f1f5f9; /* avant: #E5E7EB */
-        --text-muted: #c7d0db; /* avant: #B6BDC6 */
+        /* Texte : */
+        --text: #F4F2F3;
+        --text-muted: #a5a5a5;
 
-        /* Accent inchangé (modifiable au besoin) */
-        --accent: #e3ff04; /* avant: #34d399 */
+        /* Accent */
+        --accent: #e3ff04;
+        --accent-2: #A63446;
 
         --success: #22c55e;
         --warning: #f59e0b;
@@ -45,7 +46,7 @@ const {
         --r-xl: 24px;
 
         /* Hauteur header pour calculs d’offset */
-        --header-h: 4.4rem; /* h-16 */
+        --header-h: 5.2rem; /* h-16 */
       }
       html,
       body {
@@ -78,6 +79,17 @@ const {
       }
       /* Quand on navigue par ancre, éviter que le header masque le titre */
       :where(section[id], h2[id], h3[id]){ scroll-margin-top: calc(var(--header-h) + 0.5rem); }
+      /* Footer */
+      .footer {
+        background: var(--surface);
+        padding-top: 1rem;
+        a {
+          color: var(--accent);
+        }
+        .text-text-muted {
+          color: #272727;
+        }
+      }
     </style>
   </head>
   <body class="min-h-dvh antialiased">
