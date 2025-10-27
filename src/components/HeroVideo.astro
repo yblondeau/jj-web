@@ -1,0 +1,68 @@
+---
+// src/components/HeroVideo.astro
+interface CTA { label: string; href: string }
+interface Props {
+  eyebrow?: string;
+  title: string;           // court et impactant
+  subline?: string;        // 1 phrase max, optionnelle
+  primaryCta: CTA;
+  secondaryCta?: CTA;
+  poster?: string;         // image fallback/SEO
+  srcMp4: string;          // /public/videos/*.mp4
+  srcWebm?: string;        // /public/videos/*.webm (optionnel)
+}
+const {
+  eyebrow,
+  title,
+  subline,
+  primaryCta,
+  secondaryCta,
+  poster = "/images/placeholder-hero.jpg",
+  srcMp4,
+  srcWebm
+} = Astro.props as Props;
+---
+
+<section id="hero" class="relative min-h-[72vh] md:min-h-[80vh] isolate overflow-hidden"
+         style="margin-top: calc(var(--header-h) * -1);">
+  <!-- Vidéo de fond -->
+  <div class="absolute inset-0 -z-10">
+    <video
+      class="h-full w-full object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster={poster}
+    >
+      {srcWebm && <source src={srcWebm} type="video/webm" />}
+      <source src={srcMp4} type="video/mp4" />
+      <!-- Fallback image si la vidéo ne se charge pas -->
+      <img src={poster} alt="" width="1920" height="1080" loading="eager" />
+    </video>
+    <!-- Réduction de mouvement : image fixe -->
+    <style>
+      @media (prefers-reduced-motion: reduce) {
+        video{ display:none; }
+      }
+    </style>
+  </div>
+
+  <!-- Overlay pour lisibilité -->
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-black/55 via-black/40 to-black/60"></div>
+
+  <!-- Contenu concentré -->
+  <div class="container flex flex-col justify-end md:justify-center min-h-[72vh] md:min-h-[80vh] py-16">
+    <div class="max-w-2xl animate-fadeUp">
+      {eyebrow && <p class="text-[color:var(--accent)] tracking-wide uppercase text-xs">{eyebrow}</p>}
+      <h1 class="text-4xl md:text-5xl font-semibold leading-tight">{title}</h1>
+      {subline && <p class="mt-3 text-lg text-text-muted">{subline}</p>}
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href={primaryCta.href} class="rounded-lg px-5 py-3 bg-[color:var(--accent)] text-black font-medium shadow-soft hover:opacity-90">{primaryCta.label}</a>
+        {secondaryCta && <a href={secondaryCta.href} class="rounded-lg px-5 py-3 border border-white/15 hover:bg-white/5">{secondaryCta.label}</a>}
+      </div>
+      <p class="mt-3 text-sm text-text-muted">Pontarlier • Doubs • Suisse voisine • Présentiel & visio</p>
+    </div>
+  </div>
+</section>
