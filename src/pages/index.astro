@@ -1,110 +1,34 @@
 ---
-import { nav } from '../data/nav';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SEO from '../components/SEO.astro';
 import SchemaOrg from '../components/SchemaOrg.astro';
 import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
+import HeroVideo from '../components/HeroVideo.astro';
 import SectionTitle from '../components/SectionTitle.astro';
-import ServicesGrid from '../components/ServicesGrid.astro';
 import ProcessSteps from '../components/ProcessSteps.astro';
 import ZoneMap from '../components/ZoneMap.astro';
 import Testimonials from '../components/Testimonials.astro';
-import FAQ from '../components/FAQ.astro';
 import Footer from '../components/Footer.astro';
-
-const servicesMental = [
-  {
-    title: 'Starter — Préparation mentale',
-    summary: 'Mettre en place des bases solides : concentration, routine et objectifs.',
-    benefits: ['Clarifier l’objectif de saison', 'Construire une routine pré-compétition', 'Outils anti-stress utilisables le jour J'],
-    deliverables: ['3 séances individuelles', 'Plan d’entraînement mental', 'Fiches outils'],
-    badge: 'Sport'
-  },
-  {
-    title: 'Compétition — Performance',
-    summary: 'Transformer la pression en énergie utile et performer avec régularité.',
-    benefits: ['Gestion du trac et du focus', 'Stratégies d’entrée en performance', 'Débriefing orienté progrès'],
-    deliverables: ['6 séances', 'Checklist compétition', 'Support WhatsApp'],
-    badge: 'Sport'
-  },
-  {
-    title: 'Retour de blessure',
-    summary: 'Revenir avec confiance, étape par étape, sans brûler les étapes.',
-    benefits: ['Plan de reprise mental + progressif', 'Travail sur la confiance corporelle', 'Prévention des rechutes mentales'],
-    deliverables: ['4 séances', 'Journal de reprise', 'Coordination staff si besoin'],
-    badge: 'Sport'
-  }
-];
-
-const servicesLife = [
-  {
-    title: 'Clarté & objectifs',
-    summary: 'Faire le tri, décider et avancer sereinement.',
-    benefits: ['Clarifier ses priorités', 'Définir des objectifs réalistes', 'Plan d’action simple à suivre'],
-    deliverables: ['3 séances', 'Roadmap 6 semaines']
-  },
-  {
-    title: 'Confiance & émotions',
-    summary: 'Gérer le doute et les montagnes russes émotionnelles.',
-    benefits: ['Techniques de régulation', 'Narratif personnel plus aidant', 'Ancrage de victoires'],
-    deliverables: ['5 séances', 'Pratiques guidées audio']
-  },
-  {
-    title: 'Habitudes & énergie',
-    summary: 'Installer des routines qui tiennent vraiment.',
-    benefits: ['Micro-habitudes quotidiennes', 'Bilan énergie (sommeil, charge, récup)', 'Système anti-procrastination'],
-    deliverables: ['4 séances', 'Tableau de bord habitudes']
-  }
-];
-
-const servicesBiz = [
-  {
-    title: 'Coaching dirigeant',
-    summary: 'Décisions claires, cap tenu, énergie préservée.',
-    benefits: ['Clarifier les priorités stratégiques', 'Cadre de décision', 'Hygiene mentale du leadership'],
-    deliverables: ['6 séances', 'Feuille de route trimestrielle'],
-    badge: 'Entreprise'
-  },
-  {
-    title: 'Coaching manager',
-    summary: 'Posture, feedbacks, cohérence équipe.',
-    benefits: ['Feedbacks sans frictions', 'Gestion de conflits', 'Organisation personnelle'],
-    deliverables: ['5 séances', 'Kit 1:1 & rituels'],
-    badge: 'Entreprise'
-  },
-  {
-    title: 'Atelier équipe',
-    summary: 'Cohésion, objectifs communs et règles de fonctionnement.',
-    benefits: ['Alignement objectifs', 'Rôles & rites', 'Plan d’amélioration continue'],
-    deliverables: ['Atelier 1/2 journée', 'Synthèse actions'],
-    badge: 'Entreprise'
-  }
-];
+import { nav } from '../data/nav';
 
 const steps = [
-  { title: 'Diagnostiquer', text: 'Comprendre votre contexte, définir une cible claire et mesurable.' },
-  { title: 'Entraîner', text: 'Outiller et pratiquer : séances structurées, exercices entre les rendez-vous.' },
-  { title: 'Ancrer', text: 'Bilan, ajustements, plan d’autonomie pour la suite.' }
+  { title: 'Diagnostiquer', text: 'Comprendre votre contexte et définir une cible claire.' },
+  { title: 'Entraîner', text: 'Outiller, pratiquer, ajuster entre les séances.' },
+  { title: 'Ancrer', text: 'Stabiliser et rendre autonome.' }
 ];
 
 const testimonials = [
-  { quote: 'Je gérais mal la pression en compétition. En 6 semaines, j’ai gagné en régularité et en plaisir.', author: 'Camille', role: 'Athlète' },
-  { quote: 'On a clarifié mes priorités et j’ai arrêté de m’éparpiller. Impact direct sur mon énergie.', author: 'Thomas', role: 'Cadre' },
-  { quote: 'L’atelier a posé des règles de fonctionnement simples. Moins de tensions, plus d’efficacité.', author: 'Société Alpinis', role: 'Équipe commerciale' }
-];
-
-const faq = [
-  { question: 'Combien de temps dure une séance ?', answer: 'Entre 60 et 75 minutes selon le format.' },
-  { question: 'Faites-vous des séances en visio ?', answer: 'Oui, en visio et en présentiel selon votre localisation et vos préférences.' },
-  { question: 'Combien de séances prévoir ?', answer: 'Un cycle court commence à 3 séances. Nous adaptons selon votre objectif et votre rythme.' },
-  { question: 'Et la confidentialité ?', answer: 'Les échanges sont strictement confidentiels, dans le respect de la déontologie du coaching.' },
-  { question: 'Proposez-vous des devis pour les entreprises ?', answer: 'Oui, après un échange pour comprendre votre besoin et votre contexte.' }
+  { quote: 'Plus de lucidité en compétition, avec du plaisir retrouvé.', author: 'Camille', role: 'Athlète' },
+  { quote: 'Clarté et énergie retrouvées pour avancer sereinement.', author: 'Thomas', role: 'Cadre' },
+  { quote: 'Moins de tensions, plus d’efficacité en équipe.', author: 'Société Alpinis', role: 'Équipe commerciale' }
 ];
 ---
 
-<BaseLayout title="Préparation mentale & coaching — Pontarlier, Doubs & Suisse | Julien Jeangirard" description="Préparation mentale, coaching de vie et coaching en entreprise. Prise de rendez-vous à Pontarlier, dans le Doubs et en Suisse voisine (Besançon à Lausanne) — présentiel & visio.">
-  <SEO title="Préparation mentale & coaching — Pontarlier, Doubs & Suisse | Julien Jeangirard" description="Préparation mentale, coaching de vie et coaching en entreprise — présentiel & visio. Pontarlier, Morteau, Yverdon, Besançon, Lausanne." />
+<BaseLayout title="Julien Jeangirard — Préparation mentale, coaching de vie & entreprise"
+  description="Coaching de vie, préparation mentale et coaching en entreprise — Pontarlier, Doubs & Suisse voisine. Contact et accompagnements sur mesure, présentiel & visio.">
+
+  <SEO title="Julien Jeangirard — Préparation mentale, coaching de vie & entreprise"
+       description="Révélez votre potentiel : sport, vie, entreprise. Présentiel Doubs & Suisse voisine, ou visio." />
   <SchemaOrg type="LocalBusiness" data={{
     name: 'Julien Jeangirard Coaching',
     areaServed: ['Pontarlier','Besançon','Lausanne','Morteau','Yverdon-les-Bains','Haut-Jura'],
@@ -114,72 +38,95 @@ const faq = [
     telephone: '+33 6 00 00 00 00'
   }} />
 
-  <Header links={nav} ctaLabel="Réserver un appel" ctaHref="/contact" />
+  <Header links={nav} ctaLabel="Contact" ctaHref="/contact" transparentOnTop />
 
-  <Hero
-    title="Préparation mentale & coaching pour performer sereinement"
-    subtitle="Sportifs, particuliers, dirigeants & équipes : des outils concrets pour décider, agir et tenir dans la durée."
-    bullets={['Objectifs clairs et atteignables', 'Gestion du stress & confiance', 'Routines simples, résultats mesurables']}
+  <!-- HERO vidéo, texte condensé -->
+  <HeroVideo
+    eyebrow="Coaching humain & performance"
+    title="Préparation mentale, coaching de vie & d’équipes"
+    subline="Des outils concrets pour décider, agir et tenir dans la durée."
     primaryCta={{ label: 'Réserver un appel', href: '/contact' }}
-    secondaryCta={{ label: 'Demander un devis', href: '/contact' }}
+    secondaryCta={{ label: 'Découvrir les accompagnements', href: '/#services' }}
+    poster="/images/hero.jpg"
+    srcMp4="/videos/hero.mp4"
+    srcWebm="/videos/hero.webm"
   />
 
+  <!-- Aperçu Services (liens vers pages dédiées) -->
   <section id="services" class="container py-16">
-    <SectionTitle eyebrow="Services" title="Préparation mentale" subtitle="Performance durable, plaisir retrouvé, régularité en compétition." />
-    <ServicesGrid items={servicesMental} />
+    <SectionTitle eyebrow="🎯" title="Découvrez l’accompagnement qui vous correspond" subtitle="Des formats simples, adaptés à votre contexte." />
 
-    <div class="mt-16">
-      <SectionTitle title="Coaching de vie" subtitle="Clarté, confiance et habitudes qui tiennent." />
-      <ServicesGrid items={servicesLife} />
-    </div>
+    <div class="mt-10 grid md:grid-cols-3 gap-6 mb-16">
+      <article class="bg-surface/90 border border-white/15 rounded-xl p-6 text-left">
+        <h3 class="text-xl font-semibold">Coaching de vie</h3>
+        <p class="text-text-muted mt-2">Retrouver du sens, de la clarté, de la confiance. Reprendre votre place.</p>
+        <a href="/coaching-de-vie" class="mt-4 inline-block text-[color:var(--accent)] hover:underline">En savoir plus →</a>
+      </article>
 
-    <div class="mt-16">
-      <SectionTitle title="Coaching en entreprise" subtitle="Leadership, décisions, cohésion d’équipe." />
-      <ServicesGrid items={servicesBiz} />
+      <article class="bg-surface/90 border border-white/15 rounded-xl p-6 text-left">
+        <h3 class="text-xl font-semibold">Préparation mentale</h3>
+        <p class="text-text-muted mt-2">Gérer la pression, rester lucide, performer sereinement (sportifs & artistes).</p>
+        <a href="/preparation-mentale" class="mt-4 inline-block text-[color:var(--accent)] hover:underline">En savoir plus →</a>
+      </article>
+
+      <article class="bg-surface/90 border border-white/15 rounded-xl p-6 text-left">
+        <h3 class="text-xl font-semibold">Coaching en entreprise</h3>
+        <p class="text-text-muted mt-2">Cohésion, communication, motivation. Des comportements concrets au quotidien.</p>
+        <a href="/coaching-en-entreprise" class="mt-4 inline-block text-[color:var(--accent)] hover:underline">En savoir plus →</a>
+      </article>
     </div>
   </section>
 
+  <section class="bg-[color:var(--accent)] text-black text-center py-6">
+    <h3 class="text-3xl md:text-4xl font-semibold">Vous avez un objectif, un défi ou un changement en tête ?</h3>
+    <p class="text-lg md:text-xl mt-2 opacity-90">Faisons le point ensemble — première prise de contact gratuite et sans engagement.</p>
+    <a href="/contact" class="mt-8 inline-block rounded-lg px-8 py-4 bg-black text-[color:var(--accent)] font-semibold tracking-wide hover:opacity-90">
+      Partager mon besoin
+    </a>
+  </section>
+
+  <!-- À propos condensé -->
   <section id="apropos" class="container py-16">
-    <SectionTitle eyebrow="À propos" title="Une approche simple, ancrée dans le réel" subtitle="Coaching pragmatique, centré résultats et respect du rythme." />
-    <div class="grid lg:grid-cols-3 gap-8 items-start">
-      <figure class="lg:col-span-1 rounded-xl overflow-hidden border border-white/10">
-        <img src="/images/julien-jeangirard.jpg" alt="Portrait/visuel placeholder" loading="lazy" width="900" height="1200" />
-      </figure>
-      <div class="lg:col-span-2 space-y-6">
-        <p class="text-text-muted">Je vous accompagne avec des outils éprouvés de préparation mentale et de coaching : clarification, entraînement ciblé, ancrage. L’objectif : gagner en sérénité, en efficacité et en autonomie.</p>
-        <ProcessSteps steps={steps} />
-        <ul class="mt-4 text-sm text-text-muted list-disc ml-5">
-          <li>Certifié en coaching (référentiel reconnu) — pratique supervisée.</li>
-          <li>Expérience auprès de sportifs, étudiants, cadres, dirigeants et équipes.</li>
-          <li>Intervention possible en collaboration avec staff/soins si pertinent.</li>
-        </ul>
-      </div>
-    </div>
+    <SectionTitle eyebrow="Ma philosophie" title="Une approche simple, ancrée dans le réel" subtitle="Écoute, clarté, résultats durables." />
+    <ProcessSteps steps={steps} />
+    <p class="text-text-muted mt-6 text-center">Découvrez <a class="underline" href="/a-propos">mon parcours et mon profil</a>.</p>
   </section>
 
+  <!-- Zone -->
   <section id="zone" class="container py-16">
-    <SectionTitle eyebrow="Zone d’intervention" title="Doubs & Suisse voisine" subtitle="Présentiel selon disponibilité + visio partout." />
+    <SectionTitle eyebrow="Zone d’intervention" title="Doubs & Suisse voisine" subtitle="Présentiel & visio possibles." />
     <ZoneMap title="J’interviens ici :" areas={[
       'Pontarlier','Besançon','Lausanne','Morteau','Yverdon-les-Bains','Haut-Jura'
-    ]} note="Déplacements possibles selon devis. Séances en visio disponibles en FR/CH." />
+    ]} note="Déplacements possibles selon devis. Séances en visio disponibles en France et en Suisse." />
   </section>
 
+  <!-- Preuves -->
   <section id="preuves" class="container py-16">
-    <SectionTitle eyebrow="Preuves" title="Ce que disent les clients" subtitle="Des retours courts, concrets, sans effets de manche." />
+    <SectionTitle eyebrow="Témoignages" title="Ce que disent les clients" />
     <Testimonials items={testimonials} />
   </section>
 
-  <section id="faq" class="container py-16">
-    <SectionTitle eyebrow="FAQ" title="Questions fréquentes" subtitle="Transparence et cadre rassurant." />
-    <FAQ items={faq} />
+  <!-- Contact -->
+  <section id="contact" class="text-center container py-16">
+    <SectionTitle eyebrow="🤝🏻" title="Parlons de votre objectif" subtitle="" />
+    <p class="text-text-muted mb-6 text-center">
+      Vous ne savez pas par où commencer ?<br/>
+      Parlons ensemble de votre objectif et définissons un plan d'action sur mesure.
+    </p>
+    <a href="/contact" class="inline-flex items-center rounded-lg px-4 py-2 bg-[color:var(--accent)] text-black font-medium hover:opacity-90 focus-visible:outline-none">
+      Contactez-moi !
+    </a>
   </section>
 
-  <!-- TODO: links -->
   <Footer
     address="Pontarlier, Doubs · Interventions FR & CH · Visio"
-    phones={['+33 6 00 00 00 00']}
+    phones={['+33 6 00 00 00 00','+41 78 000 00 00']}
     email="contact@julienjeangirard-coaching.fr"
-    social={[{label:'LinkedIn', href:'#'}]}
+    social={[
+      {label:'LinkedIn', href:'#'},
+      {label:'Instagram', href:'#'},
+      {label:'Facebook', href:'#'}
+      ]}
     legalLinks={[{label:'Mentions légales', href:'#'},{label:'Politique de confidentialité', href:'#'}]}
   />
 </BaseLayout>
