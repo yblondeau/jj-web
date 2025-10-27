@@ -29,13 +29,11 @@ import { nav } from '../data/nav';
         id="contactForm"
         class="mt-10 space-y-8"
         method="POST"
-        action="/"
-        data-netlify="true"
+        action="https://api.web3forms.com/submit"
         name="contact-qualifie"
-        netlify-honeypot="bot-field"
       >
-        <!-- Netlify hidden -->
-        <input type="hidden" name="form-name" value="contact-qualifie" />
+        <!-- Web3Forms hidden -->
+        <input type="hidden" name="access_key" value="d4900795-bfc1-48ed-9826-612e4df787a1">
         <p class="hidden">
           <label>Ne pas remplir : <input name="bot-field" /></label>
         </p>
@@ -414,16 +412,17 @@ import { nav } from '../data/nav';
       submitBtn.classList.add('opacity-60','cursor-not-allowed');
       submitBtn.setAttribute('aria-busy','true');
 
-      // Construction payload (Netlify-compatible)
+      // Send payload to Web3Forms
       const formData = new FormData(form);
-      const body = new URLSearchParams();
-      for (const [k,v] of formData.entries()) body.append(k, v.toString());
-
+      const formDataObject = Object.fromEntries(formData);
       try {
         const res = await fetch(form.action || '/', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: body.toString()
+          headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+          body: JSON.stringify(formDataObject)
         });
 
         if (!res.ok) throw new Error('Network response not ok');
@@ -436,7 +435,6 @@ import { nav } from '../data/nav';
         $$('.personaBtn').forEach(b => b.classList.remove('bg-white/10','border-white/30'));
         toggleRequired(requiredP, false);
         toggleRequired(requiredE, false);
-
       } catch (err) {
         showError("Une erreur est survenue lors de l'envoi. Merci de réessayer dans un instant.");
       } finally {
