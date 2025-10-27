@@ -9,6 +9,7 @@ interface Props {
   legalLinks?: LegalLink[]
 }
 const { address, phones = [], email, social = [], legalLinks = [] } = Astro.props
+import LogoJJ from './LogoJJ.astro';
 ---
 
 <footer class="bg-[color:var(--accent)] text-black mt-12 py-8 border-t border-black/10">
@@ -33,7 +34,7 @@ const { address, phones = [], email, social = [], legalLinks = [] } = Astro.prop
 
     <!-- Bloc réseaux sociaux -->
     <div class="flex flex-col items-center md:justify-center gap-4">
-      <h3 class="text-lg font-semibold uppercase tracking-wider text-black/80">Suivez-moi</h3>
+      <LogoJJ class="w-16 h-16" />
       <div class="flex flex-wrap justify-center gap-6">
       {social.map((s) => (
         <a

@@ -12,6 +12,7 @@ const {
   ctaHref = '/contact',
   transparentOnTop = false
 } = Astro.props as Props;
+import LogoJJ from './LogoJJ.astro';
 ---
 
 <header id="site-header"
@@ -20,7 +21,11 @@ const {
   backdrop-blur border-b`}
 >
   <nav class="container flex items-center justify-between h-16" aria-label="Navigation principale">
-    <a href="/" class="font-semibold tracking-wide text-text hover:text-white focus-visible:outline-none">Julien Jeangirard</a>
+    <a id="brand" href="/" class="flex items-center gap-2 transition-colors focus-visible:outline-none
+      ${transparentOnTop ? 'text-white' : 'text-text'}">
+      <LogoJJ title="Logo JJ" class="w-8 h-8 md:w-10 md:h-10" />
+      <span class="sr-only">Julien Jeangirard</span>
+    </a>
     <ul class="hidden md:flex gap-6">
       {links.map((l) => (
         <li><a class="text-text-muted hover:text-white" href={l.href}>{l.label}</a></li>
@@ -36,13 +41,18 @@ const {
 {transparentOnTop && (
   <script>
     const header = document.getElementById('site-header');
+    const brand = document.getElementById('brand');
     const onScroll = () => {
       if (window.scrollY > 80) {
         header.classList.remove('bg-transparent','border-transparent');
         header.classList.add('bg-bg/85','border-white/10');
+        brand.classList.remove('text-white');
+        brand.classList.add('text-text');
       } else {
         header.classList.add('bg-transparent','border-transparent');
         header.classList.remove('bg-bg/85','border-white/10');
+        brand.classList.add('text-white');
+        brand.classList.remove('text-text');
       }
     };
     onScroll();
