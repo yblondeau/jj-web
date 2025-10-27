@@ -3,7 +3,11 @@ interface Props { eyebrow?: string; title: string; subtitle?: string }
 const { eyebrow, title, subtitle } = Astro.props as Props;
 ---
 <div class="text-center max-w-2xl mx-auto mb-10">
-  {eyebrow && <p class="text-[color:var(--accent)] tracking-wide uppercase text-xs">{eyebrow}</p>}
+  {eyebrow && <div class="relative flex py-5 items-center">
+    <div class="flex-grow border-t border-[color:var(--accent)]"></div>
+    <span class="flex-shrink mx-4 text-[color:var(--accent)] tracking-wide uppercase text-xl">{eyebrow}</span>
+    <div class="flex-grow border-t border-[color:var(--accent)]"></div>
+</div>}
   <h2 class="text-3xl md:text-4xl font-semibold mt-2">{title}</h2>
   {subtitle && <p class="text-text-muted mt-3">{subtitle}</p>}
 </div>
