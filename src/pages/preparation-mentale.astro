@@ -88,7 +88,7 @@ const faq = [
         </ul>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="/contact" class="rounded-lg px-5 py-3 bg-[color:var(--accent)] text-black font-medium shadow-soft hover:opacity-90">Réserver un appel</a>
-          <a href="/#preuves" class="rounded-lg px-5 py-3 border border-white/15 hover:bg-white/5">Voir des retours</a>
+          <a href="#preuves" class="rounded-lg px-5 py-3 border border-white/15 hover:bg-white/5">Voir des retours</a>
         </div>
         <p class="mt-4 text-sm text-text-muted">Pontarlier • Doubs • Suisse voisine • Présentiel & visio</p>
       </div>
@@ -141,9 +141,9 @@ const faq = [
     <ServicesGrid items={services} />
   </section>
 
-  <!-- PREUVES -->
-  <section class="container py-12">
-    <SectionTitle eyebrow="Preuves" title="Ce qui change concrètement" subtitle="Des retours courts, orientés résultats." />
+  <!-- TÉMOIGNAGES -->
+  <section id="preuves" class="container py-12">
+    <SectionTitle eyebrow="Témoignages" title="Ce qui change concrètement" subtitle="Des retours courts, orientés résultats." />
     <Testimonials items={testimonials} />
   </section>
 
