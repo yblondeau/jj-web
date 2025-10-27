@@ -7,5 +7,5 @@ export const nav: NavLink[] = [
   { label: 'Préparation mentale', href: '/preparation-mentale' },
   { label: 'Coaching de vie', href: '/coaching-de-vie' },
   { label: 'Coaching en entreprise', href: '/coaching-en-entreprise' },
-  { label: 'À propos', href: '/#apropos' },
+  { label: 'À propos', href: '/a-propos' },
 ];

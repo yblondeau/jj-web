@@ -1,6 +1,6 @@
 ---
 interface Props {
-  type: 'Organization'|'LocalBusiness'|'Service'|'FAQPage'|'BreadcrumbList';
+  type: 'Organization'|'LocalBusiness'|'Service'|'FAQPage'|'BreadcrumbList'|'Person'|'EducationalOccupationalCredential';
   data: Record<string, any>;
 }
 const { type, data } = Astro.props as Props;
