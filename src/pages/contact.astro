@@ -1,48 +1,464 @@
 ---
-import { nav } from '../data/nav';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SEO from '../components/SEO.astro';
 import SchemaOrg from '../components/SchemaOrg.astro';
 import Header from '../components/Header.astro';
-import SectionTitle from '../components/SectionTitle.astro';
-import ContactForm from '../components/ContactForm.astro';
+import { nav } from '../data/nav';
 ---
 
-<BaseLayout title="Contact — Julien Jeangirard Coaching" description="Contactez Julien Jeangirard — préparation mentale, coaching de vie, coaching en entreprise. Pontarlier, Doubs & Suisse voisine.">
-  <SEO title="Contact — Julien Jeangirard Coaching" description="Formulaire de contact, coordonnées et zone d’intervention." />
-  <SchemaOrg type="BreadcrumbList" data={{
-    itemListElement: [
-      { '@type':'ListItem', position: 1, name: 'Accueil', item: 'https://www.julienjeangirard-coaching.fr' },
-      { '@type':'ListItem', position: 2, name: 'Contact', item: 'https://www.julienjeangirard-coaching.fr/contact' }
-    ]
-  }} />
+<BaseLayout
+  title="Contact — Julien Jeangirard Coaching"
+  description="Contactez Julien Jeangirard : coaching de vie, préparation mentale, coaching en entreprise — Pontarlier, Doubs & Suisse voisine, ou visio."
+>
+  <SEO
+    title="Contact — Julien Jeangirard Coaching"
+    description="Expliquez votre besoin en 2 minutes. Je vous recontacte rapidement pour cadrer la suite."
+  />
+  <SchemaOrg type="ContactPage" data={{ name: 'Contact', url: 'https://www.julienjeangirard-coaching.fr/contact' }} />
 
-  <Header links={nav} ctaLabel="Réserver un appel" ctaHref="/contact" />
+  <Header links={nav} ctaLabel="Accueil" ctaHref="/" />
 
   <section class="container py-16">
-    <SectionTitle title="Contact" subtitle="Expliquez votre contexte en quelques lignes, on voit ensemble le meilleur format. Je vous réponds sous 24–48h." />
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-semibold leading-tight">Contact</h1>
+      <p class="text-text-muted mt-3">Dites-m’en un peu plus : je reviens vers vous sous 24–48h ouvrées.</p>
 
-    <div class="grid lg:grid-cols-2 gap-8">
-      <div class="bg-surface/70 border border-white/10 rounded-xl p-6">
-        <ContactForm privacyNote="En envoyant ce formulaire, vous acceptez d’être recontacté·e par email/téléphone. Vos données ne sont ni revendues ni partagées. Conservation limitée au traitement de votre demande." />
-      </div>
+      <!-- Formulaire -->
+      <form
+        id="contactForm"
+        class="mt-10 space-y-8"
+        method="POST"
+        action="/"
+        data-netlify="true"
+        name="contact-qualifie"
+        netlify-honeypot="bot-field"
+      >
+        <!-- Netlify hidden -->
+        <input type="hidden" name="form-name" value="contact-qualifie" />
+        <p class="hidden">
+          <label>Ne pas remplir : <input name="bot-field" /></label>
+        </p>
 
-      <aside class="space-y-6">
-        <div class="bg-surface/70 border border-white/10 rounded-xl p-6">
-          <h2 class="text-xl font-semibold">Coordonnées</h2>
-          <ul class="mt-3 space-y-2">
-            <li>Email : <a class="underline" href="mailto:contact@julienjeangirard-coaching.fr">contact@julienjeangirard-coaching.fr</a></li>
-            <li>Tél : <a class="underline" href="tel:+33600000000">+33 6 00 00 00 00</a></li>
-          </ul>
-        </div>
-        <div class="bg-surface/70 border border-white/10 rounded-xl p-6">
-          <h2 class="text-xl font-semibold">Zone d’intervention</h2>
-          <p class="text-text-muted">Pontarlier, Besançon → Lausanne, Morteau, Yverdon-les-Bains, Haut-Jura • Présentiel & visio</p>
-          <div class="mt-4 rounded-lg overflow-hidden border border-white/10">
-            <img src="/images/map.jpg" alt="Carte Google Maps placeholder" loading="lazy" width="1200" height="900" />
+        <!-- 0) Choix -->
+        <fieldset class="bg-surface/90 border border-white/15 rounded-xl p-6">
+          <legend class="font-semibold">Je suis ?</legend>
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3" role="group" aria-labelledby="persona-group">
+            <button type="button" data-persona="particulier" class="personaBtn rounded-lg px-5 py-3 border border-white/15 hover:bg-white/5">Un particulier</button>
+            <button type="button" data-persona="entreprise" class="personaBtn rounded-lg px-5 py-3 border border-white/15 hover:bg-white/5">Une entreprise</button>
           </div>
+          <input type="hidden" name="persona" id="persona" value="" />
+          <p id="personaHint" class="text-sm text-text-muted mt-3">Choisissez une option pour afficher les champs adaptés.</p>
+        </fieldset>
+
+        <!-- ========================= PARTICULIER ========================= -->
+        <fieldset id="blocParticulier" hidden class="bg-surface/90 border border-white/15 rounded-xl p-6">
+          <legend class="font-semibold">Informations — Particulier</legend>
+
+          <!-- 1. Infos de base -->
+          <div class="mt-4 grid md:grid-cols-2 gap-4">
+            <div>
+              <label for="p_nom" class="block text-sm mb-1">Nom *</label>
+              <input id="p_nom" name="p_nom" type="text" class="w-full rounded-lg bg-transparent border border-white/15 px-3 py-2" autocomplete="family-name" />
+            </div>
+            <div>
+              <label for="p_prenom" class="block text-sm mb-1">Prénom *</label>
+              <input id="p_prenom" name="p_prenom" type="text" class="w-full rounded-lg bg-transparent border border-white/15 px-3 py-2" autocomplete="given-name" />
+            </div>
+            <div>
+              <label for="p_email" class="block text-sm mb-1">Adresse email *</label>
+              <input id="p_email" name="p_email" type="email" class="w-full rounded-lg bg-transparent border border-white/15 px-3 py-2" autocomplete="email" />
+            </div>
+            <div>
+              <label for="p_tel" class="block text-sm mb-1">Numéro de téléphone</label>
+              <input id="p_tel" name="p_tel" type="tel" inputmode="tel" class="w-full rounded-lg bg-transparent border border-white/15 px-3 py-2" placeholder="+33 ..." />
+            </div>
+            <div>
+              <label for="p_age" class="block text-sm mb-1">Tranche d'âge *</label>
+              <select id="p_age" name="p_age" class="w-full rounded-lg bg-transparent border border-white/15 px-3 py-2">
+                <option value="">— Sélectionner —</option>
+                <option>Moins de 18 ans</option>
+                <option>18–24 ans</option>
+                <option>25–34 ans</option>
+                <option>35–44 ans</option>
+                <option>45–54 ans</option>
+                <option>55 ans et plus</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 2. Type de coaching -->
+          <div class="mt-6">
+            <label class="block text-sm mb-2">Type de coaching *</label>
+            <div class="flex flex-wrap gap-3">
+              <label class="inline-flex items-center gap-2">
+                <input type="radio" name="p_type" value="Coaching de vie / Développement personnel" class="accent-[color:var(--accent)]">
+                <span>Coaching de vie / Développement personnel</span>
+              </label>
+              <label class="inline-flex items-center gap-2">
+                <input type="radio" name="p_type" value="Préparation mentale" class="accent-[color:var(--accent)]">
+                <span>Préparation mentale</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 3. Objectifs -->
+          <div id="p_objectifs_block" class="mt-6">
+            <label class="block text-sm mb-2">Quels sont vos objectifs ? *</label>
+
+            <!-- Vie -->
+            <div id="p_obj_vie" class="hidden">
+              <div class="grid sm:grid-cols-2 gap-2">
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="p_objectifs_vie" value="gestion des émotions" class="accent-[color:var(--accent)]">Gestion des émotions</label>
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="p_objectifs_vie" value="confiance en soi" class="accent-[color:var(--accent)]">Confiance en soi</label>
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="p_objectifs_vie" value="motivation" class="accent-[color:var(--accent)]">Motivation</label>
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="p_objectifs_vie" value="quête de sens" class="accent-[color:var(--accent)]">Quête de sens</label>
+                <label class="inline-flex items-center gap-2 sm:col-span-2"><input type="checkbox" name="p_objectifs_vie" value="la communication" class="accent-[color:var(--accent)]">La communication</label>
+              </div>
+            </div>
+
+            <!-- Préparation mentale -->
+            <div id="p_obj_mental" class="hidden">
+              <div class="grid sm:grid-cols-2 gap-2">
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="p_objectifs_mental" value="Développer sa confiance en soi" class="accent-[color:var(--accent)]">Développer sa confiance en soi</label>
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="p_objectifs_mental" value="Gérer ses émotions" class="accent-[color:var(--accent)]">Gérer ses émotions</label>
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="p_objectifs_mental" value="Gérer son stress" class="accent-[color:var(--accent)]">Gérer son stress</label>
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="p_objectifs_mental" value="Travailler sur soi, son identité, ses croyances, ses valeurs" class="accent-[color:var(--accent)]">Travailler sur soi, son identité, ses croyances, ses valeurs</label>
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="p_objectifs_mental" value="Développer son envie de se dépasser" class="accent-[color:var(--accent)]">Développer son envie de se dépasser</label>
+                <label class="inline-flex items-center gap-2 sm:col-span-2"><input type="checkbox" name="p_objectifs_mental" value="Autre" class="accent-[color:var(--accent)]">Autre</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Situation actuelle -->
+          <div class="mt-6">
+            <label for="p_situation" class="block text-sm mb-2">Quelle est votre situation actuelle ? *</label>
+            <textarea id="p_situation" name="p_situation" rows="5" class="w-full rounded-lg bg-transparent border border-white/15 px-3 py-2" placeholder="Décrivez en quelques lignes…"></textarea>
+          </div>
+
+          <!-- 5. Disponibilités -->
+          <div class="mt-6">
+            <label class="block text-sm mb-2">Quand puis-je vous contacter ? *</label>
+            <div class="flex flex-wrap gap-4">
+              <label class="inline-flex items-center gap-2"><input type="checkbox" name="p_dispos" value="matin" class="accent-[color:var(--accent)]">Matin</label>
+              <label class="inline-flex items-center gap-2"><input type="checkbox" name="p_dispos" value="midi" class="accent-[color:var(--accent)]">Midi</label>
+              <label class="inline-flex items-center gap-2"><input type="checkbox" name="p_dispos" value="après-midi" class="accent-[color:var(--accent)]">Après-midi</label>
+              <label class="inline-flex items-center gap-2"><input type="checkbox" name="p_dispos" value="soirée" class="accent-[color:var(--accent)]">Soirée</label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ========================= ENTREPRISE ========================= -->
+        <fieldset id="blocEntreprise" hidden class="bg-surface/90 border border-white/15 rounded-xl p-6">
+          <legend class="font-semibold">Informations — Entreprise</legend>
+
+          <!-- 1. Informations générales -->
+          <div class="mt-4 grid md:grid-cols-2 gap-4">
+            <div class="md:col-span-2">
+              <label for="e_nom" class="block text-sm mb-1">Nom de l’entreprise *</label>
+              <input id="e_nom" name="e_nom" type="text" class="w-full rounded-lg bg-transparent border border-white/15 px-3 py-2" />
+            </div>
+            <div>
+              <label for="e_secteur" class="block text-sm mb-1">Secteur d’activité *</label>
+              <input id="e_secteur" name="e_secteur" type="text" class="w-full rounded-lg bg-transparent border border-white/15 px-3 py-2" placeholder="Retail, artisanat, services…" />
+            </div>
+            <div>
+              <label for="e_taille" class="block text-sm mb-1">Taille de l’entreprise *</label>
+              <select id="e_taille" name="e_taille" class="w-full rounded-lg bg-transparent border border-white/15 px-3 py-2">
+                <option value="">— Sélectionner —</option>
+                <option>moins de 10</option>
+                <option>10 à 50</option>
+                <option>50 à 100</option>
+                <option>100 et plus</option>
+              </select>
+            </div>
+            <div class="md:col-span-2">
+              <label for="e_contact" class="block text-sm mb-1">Personne contact (nom, email, téléphone) *</label>
+              <input id="e_contact" name="e_contact" type="text" class="w-full rounded-lg bg-transparent border border-white/15 px-3 py-2" placeholder="Nom Prénom — email — téléphone" />
+            </div>
+            <div>
+              <label for="e_role" class="block text-sm mb-1">Votre rôle *</label>
+              <select id="e_role" name="e_role" class="w-full rounded-lg bg-transparent border border-white/15 px-3 py-2">
+                <option value="">— Sélectionner —</option>
+                <option>directeur</option>
+                <option>manager</option>
+                <option>salarié</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 2. Objectifs -->
+          <div class="mt-6">
+            <label class="block text-sm mb-2">Objectifs principaux visés ? *</label>
+            <div class="grid sm:grid-cols-2 gap-2">
+              <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_objectifs" value="Améliorer la communication au sein de l’équipe" class="accent-[color:var(--accent)]">Améliorer la communication au sein de l’équipe</label>
+              <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_objectifs" value="Prévenir ou gérer les conflits internes" class="accent-[color:var(--accent)]">Prévenir ou gérer les conflits internes</label>
+              <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_objectifs" value="Stimuler la motivation et l’implication au travail" class="accent-[color:var(--accent)]">Stimuler la motivation et l’implication au travail</label>
+              <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_objectifs" value="Favoriser la confiance, la solidarité, l’entraide" class="accent-[color:var(--accent)]">Favoriser la confiance, la solidarité, l’entraide</label>
+              <label class="inline-flex items-center gap-2 sm:col-span-2"><input type="checkbox" name="e_objectifs" value="Mieux gérer le stress lié à la charge de travail ou à la relation client" class="accent-[color:var(--accent)]">Mieux gérer le stress lié à la charge de travail ou à la relation client</label>
+            </div>
+          </div>
+
+          <!-- 3. Contexte -->
+          <div class="mt-6">
+            <label for="e_contexte" class="block text-sm mb-2">Contexte actuel *</label>
+            <textarea id="e_contexte" name="e_contexte" rows="5" class="w-full rounded-lg bg-transparent border border-white/15 px-3 py-2" placeholder="Décrivez brièvement votre contexte (équipe, enjeux, planning)…"></textarea>
+          </div>
+
+          <!-- 4. Logistique -->
+          <div class="mt-6 grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm mb-2">Souhaitez-vous des séances :</label>
+              <div class="flex flex-wrap gap-3">
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_seances" value="individuelles" class="accent-[color:var(--accent)]">Individuelles</label>
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_seances" value="collectives" class="accent-[color:var(--accent)]">Collectives</label>
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_seances" value="un mix des deux" class="accent-[color:var(--accent)]">Un mix des deux</label>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm mb-2">Préférez-vous un accompagnement :</label>
+              <div class="flex flex-wrap gap-3">
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_modalite" value="en présentiel" class="accent-[color:var(--accent)]">En présentiel</label>
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_modalite" value="à distance" class="accent-[color:var(--accent)]">À distance</label>
+                <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_modalite" value="hybride" class="accent-[color:var(--accent)]">Hybride</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Disponibilités -->
+          <div class="mt-6">
+            <label class="block text-sm mb-2">Quand puis-je vous contacter ? *</label>
+            <div class="flex flex-wrap gap-4">
+              <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_dispos" value="matin" class="accent-[color:var(--accent)]">Matin</label>
+              <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_dispos" value="midi" class="accent-[color:var(--accent)]">Midi</label>
+              <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_dispos" value="après-midi" class="accent-[color:var(--accent)]">Après-midi</label>
+              <label class="inline-flex items-center gap-2"><input type="checkbox" name="e_dispos" value="soirée" class="accent-[color:var(--accent)]">Soirée</label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- RGPD + Submit -->
+        <div class="bg-surface/90 border border-white/15 rounded-xl p-6">
+          <p class="text-sm text-text-muted">
+            En envoyant ce formulaire, vous acceptez d’être recontacté·e au sujet de votre demande.
+            Vos données ne sont ni revendues, ni partagées ; conservation limitée au traitement de votre demande.
+          </p>
+          <button id="submitBtn" type="submit"
+            class="mt-4 inline-flex items-center rounded-lg px-6 py-3 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">
+            Envoyer ma demande
+          </button>
         </div>
-      </aside>
+
+        <!-- Alerte validation -->
+        <div id="formAlert" class="hidden text-sm bg-red-500/10 text-red-300 border border-red-500/30 rounded-lg p-3" role="alert" aria-live="polite"></div>
+      </form>
     </div>
   </section>
+
+  <!-- TOAST succès -->
+  <div id="toast" class="fixed inset-x-0 bottom-4 flex justify-center z-[60] pointer-events-none hidden">
+    <div class="pointer-events-auto bg-[color:var(--accent)] text-black border border-black/10 rounded-lg px-4 py-3 shadow-soft"
+         role="status" aria-live="assertive">
+      ✅ Merci ! Votre demande a bien été envoyée. Je vous recontacte très vite.
+    </div>
+  </div>
+
+  <!-- Script logique formulaire -->
+  <script>
+    // Helpers
+    const $ = (sel, ctx = document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+
+    const form = $('#contactForm');
+    const submitBtn = $('#submitBtn');
+    const personaInput = $('#persona');
+    const blocP = $('#blocParticulier');
+    const blocE = $('#blocEntreprise');
+    const alertBox = $('#formAlert');
+    const toast = $('#toast');
+
+    let isSubmitting = false;
+
+    // Champs requis dynamiques
+    const requiredP = ['#p_nom','#p_prenom','#p_email','#p_age','#p_situation'];
+    const requiredE = ['#e_nom','#e_secteur','#e_taille','#e_contact','#e_role','#e_contexte'];
+
+    // Choix "Je suis ?"
+    $$('.personaBtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const persona = btn.dataset.persona;
+        personaInput.value = persona;
+
+        // Visuels boutons
+        $$('.personaBtn').forEach(b => b.classList.remove('bg-white/10','border-white/30'));
+        btn.classList.add('bg-white/10','border-white/30');
+
+        if (persona === 'particulier') {
+          blocP.hidden = false; blocE.hidden = true;
+          toggleRequired(requiredP, true); toggleRequired(requiredE, false);
+        } else {
+          blocP.hidden = true; blocE.hidden = false;
+          toggleRequired(requiredP, false); toggleRequired(requiredE, true);
+        }
+
+        $('#personaHint').textContent = persona === 'particulier'
+          ? 'Vous avez choisi : Particulier.'
+          : 'Vous avez choisi : Entreprise.';
+      });
+    });
+
+    // Type de coaching (particulier) -> objectifs (affiche l'un, cache l'autre)
+    // Sélecteurs
+    const radiosType = $$('input[name="p_type"]');
+    const blockVie = document.getElementById('p_obj_vie');
+    const blockMental = document.getElementById('p_obj_mental');
+
+    function clearChecks(container) {
+      if (!container) return;
+      container.querySelectorAll('input[type="checkbox"]').forEach(c => (c.checked = false));
+    }
+
+    function showVieHideMental() {
+      blockVie.classList.remove('hidden');
+      blockMental.classList.add('hidden');
+      clearChecks(blockMental);
+    }
+
+    function showMentalHideVie() {
+      blockMental.classList.remove('hidden');
+      blockVie.classList.add('hidden');
+      clearChecks(blockVie);
+    }
+
+    // Bascule au changement de type
+    radiosType.forEach(r => {
+      r.addEventListener('change', () => {
+        if (!r.checked) return;
+        if (r.value.startsWith('Coaching de vie')) {
+          showVieHideMental();
+        } else {
+          showMentalHideVie();
+        }
+      });
+    });
+
+    // Cas reload / retour arrière : réappliquer l’état correct
+    const prechecked = radiosType.find(r => r.checked)?.value;
+    if (prechecked) {
+      prechecked.startsWith('Coaching de vie') ? showVieHideMental() : showMentalHideVie();
+    }
+
+    // BONUS : quand on change de persona, on cache les deux listes et on décoche tout
+    const personaBtns = $$('.personaBtn');
+    personaBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.persona === 'particulier') {
+          // On ne montre AUCUNE liste tant que le type n’est pas choisi
+          blockVie.classList.add('hidden');
+          blockMental.classList.add('hidden');
+          clearChecks(blockVie);
+          clearChecks(blockMental);
+          // Et on vide la sélection de type si besoin
+          radiosType.forEach(r => (r.checked = false));
+        }
+      });
+    });
+
+    function toggleRequired(selectors, state) {
+      selectors.forEach(sel => {
+        const el = $(sel);
+        if (!el) return;
+        if (state) el.setAttribute('required', 'true');
+        else el.removeAttribute('required');
+      });
+    }
+
+    // Soumission AJAX + validations + prévention double-submit
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (isSubmitting) return;
+
+      alertBox.classList.add('hidden');
+      alertBox.textContent = '';
+
+      // Validations minimales
+      if (!personaInput.value) return showError('Veuillez préciser si vous êtes un particulier ou une entreprise.');
+
+      if (personaInput.value === 'particulier') {
+        const type = $$('input[name="p_type"]').find(r => r.checked)?.value;
+        if (!type) return showError('Merci de sélectionner un type de coaching.');
+        const hasVie = !blockVie.hidden && $$('input[name="p_objectifs_vie"]:checked').length > 0;
+        const hasMental = !blockMental.hidden && $$('input[name="p_objectifs_mental"]:checked').length > 0;
+        if (!hasVie && !hasMental) return showError('Merci de cocher au moins un objectif.');
+        if (!$('#p_situation').value.trim()) return showError('Merci de décrire brièvement votre situation.');
+      } else {
+        if ($$('input[name="e_objectifs"]:checked').length === 0) return showError('Merci de sélectionner au moins un objectif (entreprise).');
+        if (!$('#e_contexte').value.trim()) return showError('Merci de décrire brièvement votre contexte.');
+      }
+
+      // Prévenir double-submit
+      isSubmitting = true;
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-60','cursor-not-allowed');
+      submitBtn.setAttribute('aria-busy','true');
+
+      // Construction payload (Netlify-compatible)
+      const formData = new FormData(form);
+      const body = new URLSearchParams();
+      for (const [k,v] of formData.entries()) body.append(k, v.toString());
+
+      try {
+        const res = await fetch(form.action || '/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString()
+        });
+
+        if (!res.ok) throw new Error('Network response not ok');
+
+        // Succès : toast + reset propre
+        showToast();
+        form.reset();
+        personaInput.value = '';
+        blocP.hidden = true; blocE.hidden = true;
+        $$('.personaBtn').forEach(b => b.classList.remove('bg-white/10','border-white/30'));
+        toggleRequired(requiredP, false);
+        toggleRequired(requiredE, false);
+
+      } catch (err) {
+        showError("Une erreur est survenue lors de l'envoi. Merci de réessayer dans un instant.");
+      } finally {
+        // Ré-activer le bouton (en cas d’erreur). Si succès, on le réactive après la disparition du toast.
+        if (!toast.classList.contains('hidden')) {
+          // Succès : garder désactivé pendant l’affichage du toast (UX anti-double envoi)
+          setTimeout(() => {
+            isSubmitting = false;
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-60','cursor-not-allowed');
+            submitBtn.removeAttribute('aria-busy');
+          }, 3500);
+        } else {
+          isSubmitting = false;
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('opacity-60','cursor-not-allowed');
+          submitBtn.removeAttribute('aria-busy');
+        }
+      }
+    });
+
+    function showError(msg){
+      alertBox.textContent = msg;
+      alertBox.classList.remove('hidden');
+      alertBox.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+
+    function showToast(){
+      toast.classList.remove('hidden');
+      toast.style.opacity = '0';
+      toast.animate([{opacity:0, transform:'translateY(8px)'},{opacity:1, transform:'translateY(0)'}], {duration:200, fill:'forwards'});
+      setTimeout(() => {
+        toast.animate([{opacity:1, transform:'translateY(0)'},{opacity:0, transform:'translateY(8px)'}], {duration:250, fill:'forwards'});
+        setTimeout(() => toast.classList.add('hidden'), 260);
+      }, 3000);
+    }
+  </script>
 </BaseLayout>
