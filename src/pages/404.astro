@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { nav } from '../data/nav';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Page non trouvée | Julien Jeangirard Coaching" description="La page que vous recherchez n'existe pas.">
+  <Header links={nav} />
+
+  <main class="flex flex-col items-center justify-center min-h-[70vh] text-center px-6">
+    <h1 class="text-6xl font-bold mb-4 text-[color:var(--accent)]">404</h1>
+    <p class="text-xl text-text-muted mb-8">
+      Oups... la page que vous recherchez n’existe pas ou a été déplacée.
+    </p>
+    <a
+      href="/"
+      class="inline-flex items-center px-6 py-3 rounded-lg bg-[color:var(--accent)] text-black font-medium hover:opacity-90 transition"
+    >
+      Retour à l’accueil
+    </a>
+  </main>
+
+  <Footer />
+</BaseLayout>
