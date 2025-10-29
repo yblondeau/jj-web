@@ -10,7 +10,7 @@ import ZoneMap from '../components/ZoneMap.astro';
 import Testimonials from '../components/Testimonials.astro';
 import Footer from '../components/Footer.astro';
 import { nav } from '../data/nav';
-import { BASE } from '../utils/paths';
+import { withBase } from '../utils/paths';
 
 const steps = [
   { title: 'Diagnostiquer', text: 'Comprendre votre contexte et définir une cible claire.' },
@@ -39,7 +39,7 @@ const testimonials = [
     telephone: '+33 6 00 00 00 00'
   }} />
 
-  <Header links={nav} ctaLabel="Contact" ctaHref="${BASE}contact" transparentOnTop />
+  <Header links={nav} ctaLabel="Contact" ctaHref={withBase('contact')} transparentOnTop />
 
   <!-- HERO vidéo, texte condensé -->
   <HeroVideo
@@ -63,19 +63,19 @@ const testimonials = [
       <article class="bg-surface/90 border border-white/15 rounded-xl p-6 text-left">
         <h3 class="text-xl font-semibold">Coaching de vie</h3>
         <p class="text-text-muted mt-2">Retrouver du sens, de la clarté, de la confiance. Reprendre votre place.</p>
-        <a href="${BASE}coaching-de-vie" class="mt-4 inline-block text-[color:var(--accent)] hover:underline">En savoir plus →</a>
+        <a href={withBase('coaching-de-vie')} class="mt-4 inline-block text-[color:var(--accent)] hover:underline">En savoir plus →</a>
       </article>
 
       <article class="bg-surface/90 border border-white/15 rounded-xl p-6 text-left">
         <h3 class="text-xl font-semibold">Préparation mentale</h3>
         <p class="text-text-muted mt-2">Gérer la pression, rester lucide, performer sereinement (sportifs & artistes).</p>
-        <a href="${BASE}preparation-mentale" class="mt-4 inline-block text-[color:var(--accent)] hover:underline">En savoir plus →</a>
+        <a href={withBase('preparation-mentale')} class="mt-4 inline-block text-[color:var(--accent)] hover:underline">En savoir plus →</a>
       </article>
 
       <article class="bg-surface/90 border border-white/15 rounded-xl p-6 text-left">
         <h3 class="text-xl font-semibold">Coaching en entreprise</h3>
         <p class="text-text-muted mt-2">Cohésion, communication, motivation. Des comportements concrets au quotidien.</p>
-        <a href="${BASE}coaching-en-entreprise" class="mt-4 inline-block text-[color:var(--accent)] hover:underline">En savoir plus →</a>
+        <a href={withBase('coaching-en-entreprise')} class="mt-4 inline-block text-[color:var(--accent)] hover:underline">En savoir plus →</a>
       </article>
     </div>
   </section>
@@ -83,7 +83,7 @@ const testimonials = [
   <section class="bg-[color:var(--accent)] text-black text-center py-6">
     <h3 class="text-3xl md:text-4xl font-semibold">Vous avez un objectif, un défi ou un changement en tête ?</h3>
     <p class="text-lg md:text-xl mt-2 opacity-90">Faisons le point ensemble — première prise de contact gratuite et sans engagement.</p>
-    <a href="${BASE}contact" class="mt-8 inline-block rounded-lg px-8 py-4 bg-black text-[color:var(--accent)] font-semibold tracking-wide hover:opacity-90">
+    <a href={withBase("contact")} class="mt-8 inline-block rounded-lg px-8 py-4 bg-black text-[color:var(--accent)] font-semibold tracking-wide hover:opacity-90">
       Partager mon besoin
     </a>
   </section>
@@ -92,7 +92,7 @@ const testimonials = [
   <section id="apropos" class="container py-16">
     <SectionTitle eyebrow="Ma philosophie" title="Une approche simple, ancrée dans le réel" subtitle="Écoute, clarté, résultats durables." />
     <ProcessSteps steps={steps} />
-    <p class="text-text-muted mt-6 text-center">Découvrez <a class="underline" href="${BASE}a-propos">mon parcours et mon profil</a>.</p>
+    <p class="text-text-muted mt-6 text-center">Découvrez <a class="underline" href={withBase('a-propos')}>mon parcours et mon profil</a>.</p>
   </section>
 
   <!-- Zone -->
@@ -116,7 +116,7 @@ const testimonials = [
       Vous ne savez pas par où commencer ?<br/>
       Parlons ensemble de votre objectif et définissons un plan d'action sur mesure.
     </p>
-    <a href="${BASE}contact" class="inline-flex items-center rounded-lg px-4 py-2 bg-[color:var(--accent)] text-black font-medium hover:opacity-90 focus-visible:outline-none">
+    <a href={withBase('contact')} class="inline-flex items-center rounded-lg px-4 py-2 bg-[color:var(--accent)] text-black font-medium hover:opacity-90 focus-visible:outline-none">
       Contactez-moi !
     </a>
   </section>
