@@ -1,5 +1,5 @@
 ---
-import { BASE } from '../utils/paths';
+import { withBase } from '../utils/paths';
 interface Props { title: string; areas: string[]; note?: string }
 const { title, areas, note } = Astro.props as Props;
 ---
@@ -12,6 +12,6 @@ const { title, areas, note } = Astro.props as Props;
     {note && <p class="text-text-muted mt-4">{note}</p>}
   </div>
   <figure class="rounded-xl overflow-hidden border border-white/10">
-    <img src="${BASE}images/map.jpg" alt="Carte stylisée de la zone d’intervention" loading="lazy" width="1200" height="900" />
+    <img src={withBase('images/map.jpg')} alt="Carte stylisée de la zone d’intervention" loading="lazy" width="1200" height="900" />
   </figure>
 </section>

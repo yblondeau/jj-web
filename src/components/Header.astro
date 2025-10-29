@@ -13,7 +13,7 @@ const {
   transparentOnTop = false
 } = Astro.props as Props;
 import LogoJJ from './LogoJJ.astro';
-import { BASE } from '../utils/paths';
+import { withBase } from '../utils/paths';
 ---
 
 <header id="site-header"
@@ -22,7 +22,7 @@ import { BASE } from '../utils/paths';
   backdrop-blur border-b`}
 >
   <nav class="container flex items-center justify-between h-16" aria-label="Navigation principale">
-    <a id="brand" href="${BASE}" class="flex items-center gap-2 transition-colors focus-visible:outline-none
+    <a id="brand" href={withBase('')} class="flex items-center gap-2 transition-colors focus-visible:outline-none
       ${transparentOnTop ? 'text-white' : 'text-text'}">
       <LogoJJ title="Logo JJ" class="w-8 h-8 md:w-10 md:h-10" />
       <span class="sr-only">Julien Jeangirard</span>

@@ -1,4 +1,4 @@
-import { BASE } from '../utils/paths';
+import { withBase } from '../utils/paths';
 
 export interface NavLink {
   label: string;

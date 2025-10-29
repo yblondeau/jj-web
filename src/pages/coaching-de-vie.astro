@@ -7,7 +7,7 @@ import Testimonials from '../components/Testimonials.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { nav } from '../data/nav';
-import { BASE } from '../utils/paths';
+import { withBase } from '../utils/paths';
 
 const testimonials = [
   { quote: 'Ce travail m’a permis de retrouver de l’énergie et de faire des choix que je repoussais depuis des années.', author: 'Julien', role: '44 ans' },
@@ -40,7 +40,7 @@ const testimonials = [
   }} />
 
   <!-- Header global -->
-  <Header links={nav} ctaLabel="Réserver un appel" ctaHref="${BASE}contact" />
+  <Header links={nav} ctaLabel="Réserver un appel" ctaHref={withBase('contact')} />
 
   <!-- HERO -->
   <section class="relative overflow-clip">
@@ -54,12 +54,12 @@ const testimonials = [
           (Re)prendre votre place. Vous reconnecter à vous. Ouvrir un nouveau chapitre — avec clarté, confiance et simplicité.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="${BASE}contact" class="rounded-lg px-5 py-3 bg-[color:var(--accent)] text-black font-medium shadow-soft hover:opacity-90">Réserver ma séance découverte</a>
+          <a href={withBase('contact')} class="rounded-lg px-5 py-3 bg-[color:var(--accent)] text-black font-medium shadow-soft hover:opacity-90">Réserver ma séance découverte</a>
           <a href="#preuves" class="rounded-lg px-5 py-3 border border-white/15 hover:bg-white/5">Voir des témoignages</a>
         </div>
       </div>
       <div class="rounded-xl overflow-hidden border border-white/15 shadow-soft">
-        <img src="${BASE}images/focus.jpg" alt="Visuel évocateur de recentrage et de clarté personnelle" loading="lazy" width="1200" height="900" />
+        <img src={withBase('images/focus.jpg')} alt="Visuel évocateur de recentrage et de clarté personnelle" loading="lazy" width="1200" height="900" />
       </div>
     </div>
   </section>
@@ -138,7 +138,7 @@ const testimonials = [
         <p class="text-text-muted mt-2">
           Outils mobilisés : coaching, PNL, exercices personnalisés, routines et suivis entre séances si utile.
         </p>
-        <a href="${BASE}contact" class="mt-4 inline-block rounded-lg px-5 py-3 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">Réserver ma séance découverte</a>
+        <a href={withBase('contact')} class="mt-4 inline-block rounded-lg px-5 py-3 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">Réserver ma séance découverte</a>
       </div>
     </div>
   </section>
@@ -162,7 +162,7 @@ const testimonials = [
       <p class="text-text-muted mt-2">
         🎁 <strong class="text-white">Première séance découverte offerte</strong> — faisons le point ensemble et vérifions l’adéquation de l’accompagnement.
       </p>
-      <a href="${BASE}contact" class="mt-6 inline-block rounded-lg px-6 py-3 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">
+      <a href={withBase('contact')} class="mt-6 inline-block rounded-lg px-6 py-3 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">
         Réserver ma séance découverte
       </a>
     </div>
@@ -184,7 +184,7 @@ const testimonials = [
       <p class="text-text-muted mt-3">
         <strong class="text-white">Vous avez le droit d’évoluer.</strong> Vous avez le droit de vivre une vie qui vous ressemble.
       </p>
-      <a href="${BASE}contact" class="mt-6 inline-block rounded-lg px-6 py-3 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">
+      <a href={withBase('contact')} class="mt-6 inline-block rounded-lg px-6 py-3 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">
         Réserver ma séance découverte
       </a>
     </div>
