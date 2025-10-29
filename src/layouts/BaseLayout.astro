@@ -5,16 +5,17 @@ const {
   url = "https://www.julienjeangirard-coaching.fr",
   image = "/images/og-image.jpg",
 } = Astro.props;
+import { BASE } from '../utils/paths';
 ---
 
 <html lang="fr" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="${BASE}favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="${BASE}favicon.ico" sizes="any" />
     <meta name="theme-color" content="#0B0E11" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="manifest" href="${BASE}site.webmanifest" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:type" content="website" />
