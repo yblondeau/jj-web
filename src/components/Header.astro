@@ -44,15 +44,15 @@ import LogoJJ from './LogoJJ.astro';
     const brand = document.getElementById('brand');
     const onScroll = () => {
       if (window.scrollY > 80) {
-        header.classList.remove('bg-transparent','border-transparent');
-        header.classList.add('bg-bg/85','border-white/10');
-        brand.classList.remove('text-white');
-        brand.classList.add('text-text');
+        header?.classList.remove('bg-transparent','border-transparent');
+        header?.classList.add('bg-bg/85','border-white/10');
+        brand?.classList.remove('text-white');
+        brand?.classList.add('text-text');
       } else {
-        header.classList.add('bg-transparent','border-transparent');
-        header.classList.remove('bg-bg/85','border-white/10');
-        brand.classList.add('text-white');
-        brand.classList.remove('text-text');
+        header?.classList.add('bg-transparent','border-transparent');
+        header?.classList.remove('bg-bg/85','border-white/10');
+        brand?.classList.add('text-white');
+        brand?.classList.remove('text-text');
       }
     };
     onScroll();
