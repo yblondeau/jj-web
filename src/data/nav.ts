@@ -6,8 +6,8 @@ export interface NavLink {
 }
 
 export const nav: NavLink[] = [
-  { label: 'Préparation mentale', href: `${BASE}/preparation-mentale` },
-  { label: 'Coaching de vie', href: `${BASE}/coaching-de-vie` },
-  { label: 'Coaching en entreprise', href: `${BASE}/coaching-en-entreprise` },
-  { label: 'À propos', href: `${BASE}/a-propos` },
+  { label: 'Préparation mentale', href: withBase('/preparation-mentale') },
+  { label: 'Coaching de vie', href: withBase('/coaching-de-vie') },
+  { label: 'Coaching en entreprise', href: withBase('/coaching-en-entreprise') },
+  { label: 'À propos', href: withBase('/a-propos') },
 ];
