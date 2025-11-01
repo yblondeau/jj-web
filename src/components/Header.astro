@@ -3,7 +3,6 @@ interface Link { label: string; href: string }
 interface Props {
   links: Link[];
   ctaLabel?: string; ctaHref?: string;
-  /** Rend le header transparent en haut de page, puis opaque après scroll */
   transparentOnTop?: boolean;
 }
 const {
@@ -12,51 +11,138 @@ const {
   ctaHref = '/contact',
   transparentOnTop = false
 } = Astro.props as Props;
+
 import LogoJJ from './LogoJJ.astro';
 import { withBase } from '../utils/paths';
 ---
 
-<header id="site-header"
-  class={`w-full fixed top-0 left-0 right-0 z-50 transition-colors duration-300
-  ${transparentOnTop ? 'bg-transparent border-transparent' : 'bg-bg/85 border-white/10'}
+<header id="site-header" data-transparent={transparentOnTop}
+  class={`w-full fixed top-0 left-0 right-0 z-50 transition-colors duration-300 border-transparent
+  ${transparentOnTop ? 'bg-transparent' : 'bg-[color:var(--accent)]'}
   backdrop-blur border-b`}
 >
   <nav class="container flex items-center justify-between h-16" aria-label="Navigation principale">
-    <a id="brand" href={withBase('')} class="flex items-center gap-2 transition-colors focus-visible:outline-none
-      ${transparentOnTop ? 'text-white' : 'text-text'}">
+    <!-- Brand -->
+    <a id="brand" href={withBase('')} class={`flex items-center gap-2 transition-colors focus-visible:outline-none
+      ${transparentOnTop ? 'text-white' : 'text-black'}`}>
       <LogoJJ title="Logo JJ" class="w-8 h-8 md:w-10 md:h-10" />
       <span class="sr-only">Julien Jeangirard</span>
     </a>
+
+    <!-- Desktop nav -->
     <ul class="hidden md:flex gap-6">
       {links.map((l) => (
-        <li><a class="text-text-muted hover:text-white" href={l.href}>{l.label}</a></li>
+        <li><a class="text-white hover:text-[color:var(--accent)] transition-colors duration-300
+               [.is-opaque_&]:text-[color:var(--bg)]
+               [.is-opaque_&]:hover:text-black" href={l.href}>{l.label}</a></li>
       ))}
     </ul>
-    <a href={ctaHref} class="inline-flex items-center rounded-lg px-4 py-2 bg-[color:var(--accent)] text-black font-medium hover:opacity-90 focus-visible:outline-none">
-      {ctaLabel}
-    </a>
+
+    <div class="hidden md:flex">
+      <a id="headerCta" href={ctaHref} class="inline-flex items-center rounded-lg px-4 py-2 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">
+        {ctaLabel}
+      </a>
+    </div>
+
+    <!-- MOBILE: hamburger -->
+    <button id="menuToggle"
+      class={`md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]
+      ${transparentOnTop ? 'text-white' : 'text-black'}`}
+      aria-label="Ouvrir le menu"
+      aria-controls="mobileMenu"
+      aria-expanded="false">
+      <!-- icône -->
+      <svg id="iconOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg id="iconClose" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+    </button>
   </nav>
+
+  <!-- MOBILE panel -->
+  <div id="mobileMenu" class="md:hidden hidden absolute inset-x-0 top-16 z-40">
+    <div id="mobileMenuList"
+      class={`mx-4 rounded-xl border border-white/15 p-4 shadow-2xl bg-white
+      ${transparentOnTop ? 'bg-opacity-30' : 'bg-opacity-90'}`}>
+      <ul class="flex flex-col divide-y divide-white/10">
+        {links.map((l) => (
+          <li><a class="block py-3 text-base text-white hover:text-[color:var(--accent)] transition-colors duration-300
+               [.is-opaque_&]:text-[color:var(--bg)]
+               [.is-opaque_&]:hover:text-black" href={l.href}>{l.label}</a></li>
+        ))}
+      </ul>
+      <a href={ctaHref} class="mt-4 block text-center rounded-lg px-4 py-3 bg-[color:var(--accent)] text-black font-medium hover:opacity-90">
+        {ctaLabel}
+      </a>
+    </div>
+  </div>
 </header>
 
-{/** JS minimal : si transparentOnTop, le header devient opaque au-delà de 80px */}
-{transparentOnTop && (
-  <script>
-    const header = document.getElementById('site-header');
-    const brand = document.getElementById('brand');
-    const onScroll = () => {
-      if (window.scrollY > 80) {
-        header?.classList.remove('bg-transparent','border-transparent');
-        header?.classList.add('bg-bg/85','border-white/10');
-        brand?.classList.remove('text-white');
-        brand?.classList.add('text-text');
-      } else {
-        header?.classList.add('bg-transparent','border-transparent');
-        header?.classList.remove('bg-bg/85','border-white/10');
-        brand?.classList.add('text-white');
-        brand?.classList.remove('text-text');
-      }
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-  </script>
-)}
+<script>
+  const header    = document.getElementById('site-header');
+  const brand     = document.getElementById('brand');
+  const headerCta = document.getElementById('headerCta');
+
+  const toggle    = document.getElementById('menuToggle');
+  const menu      = document.getElementById('mobileMenu');
+  const menuList  = document.getElementById('mobileMenuList');
+  const iconOpen  = document.getElementById('iconOpen');
+  const iconClose = document.getElementById('iconClose');
+
+  const isTransparentOnTop = header?.dataset.transparent === 'true';
+
+  const colorize = () => {
+    if (!isTransparentOnTop) {
+      header?.classList.add('is-opaque');
+      return;
+    }
+    if (window.scrollY > 80 || !header) return makeOpaque();
+    makeTransparent();
+  };
+  function makeOpaque(){
+    console.log('making opaque');
+    header?.classList.add('is-opaque');
+    header?.classList.remove('bg-transparent'); header?.classList.add('bg-[color:var(--accent)]');
+    brand?.classList.remove('text-white'); brand?.classList.add('text-black');
+    headerCta?.classList.remove('text-black'); headerCta?.classList.add('text-white');
+    headerCta?.classList.remove('bg-[color:var(--accent)]'); headerCta?.classList.add('bg-[color:var(--bg)]');
+
+    toggle?.classList.remove('text-white'); toggle?.classList.add('text-black');
+    menuList?.classList.remove('bg-opacity-30'); menuList?.classList.add('bg-opacity-90');
+  }
+  function makeTransparent(){
+    console.log('making transparent');
+    header?.classList.remove('is-opaque');
+    header?.classList.add('bg-transparent'); header?.classList.remove('bg-[color:var(--accent)]');
+    brand?.classList.add('text-white'); brand?.classList.remove('text-black');
+    headerCta?.classList.add('text-black'); headerCta?.classList.remove('text-white');
+    headerCta?.classList.add('bg-[color:var(--accent)]'); headerCta?.classList.remove('bg-[color:var(--bg)]');
+
+    toggle?.classList.add('text-white'); toggle?.classList.remove('text-black');
+    menuList?.classList.add('bg-opacity-30'); menuList?.classList.remove('bg-opacity-90');
+  }
+
+  colorize();
+  window.addEventListener('scroll', colorize, { passive: true });
+
+  // Toggle mobile menu
+  toggle?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+    const open = menu?.classList.contains('hidden');
+    toggle.setAttribute('aria-expanded', String(open));
+    iconOpen?.classList.toggle('hidden', !open);
+    iconClose?.classList.toggle('hidden', open);
+
+    // Empêcher le scroll de fond quand le menu est ouvert
+    document.documentElement.classList.toggle('overflow-hidden', !open);
+  });
+
+  // Fermer le menu quand on clique un lien
+  menu?.addEventListener('click', (e) => {
+    const a = (e.target instanceof Element) ? e.target.closest('a') : null;
+    if (!a) return;
+    menu?.classList.add('hidden');
+    toggle?.setAttribute('aria-expanded','false');
+    iconOpen?.classList.remove('hidden');
+    iconClose?.classList.add('hidden');
+    document.documentElement.classList.remove('overflow-hidden');
+  });
+</script>
