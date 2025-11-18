@@ -3,8 +3,8 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://yblondeau.github.io', // TODO: update with final URL
-  base: '/jj-web/',
+  site: 'https://julienjeangirard-coaching.com',
+  base: '/',
   integrations: [
     tailwind({ applyBaseStyles: true }),
     sitemap()
