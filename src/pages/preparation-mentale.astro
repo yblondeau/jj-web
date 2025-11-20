@@ -45,8 +45,9 @@ const services = [
 ];
 
 const testimonials = [
-  { quote: 'Avant chaque finale je tremblais. Les routines et la respiration m’ont rendu lucide, je retrouve du plaisir.', author: 'Élise', role: 'Sprinteuse' },
-  { quote: 'Avant un récital je me sabotais. On a travaillé le discours interne et l’imagerie : j’entre sur scène avec calme.', author: 'Mathieu', role: 'Pianiste' }
+  { quote: "Une véritable révélation ! Grâce à cet accompagnement, j'ai pu retrouver confiance en moi, clarifier mes objectifs et avancer avec beaucoup plus de sérénité. Un grand merci pour l'écoute bienveillante et les outils concrets que tu m'as transmis", author: 'Virgile', role: 'Golfeur' },
+  { quote: "Cela fait 3 mois que je travaille avec Julien pour le rugby. Grâce à sa capacité d'écoute et d'adaptation, il m'a beaucoup aidé à évoluer et prendre confiance en moi. Il est toujours à l'écoute et il donne toujours de bons conseils.", author: 'Emma', role: 'Rugbywoman' },
+  { quote: "... et j'ai aussi l'impression d'avoir vraiment repris confiance en moi sur le terrain et d'avoir progressée sur plusieurs choses donc merci beaucoup car c'est grâce au travail que nous avons fait", author: 'Juliette', role: 'Handballeuse' }
 ];
 
 const faq = [
@@ -90,7 +91,7 @@ const faq = [
         </ul>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href={withBase('contact')} class="rounded-lg px-5 py-3 bg-[color:var(--accent)] text-black font-medium shadow-soft hover:opacity-90">Réserver un appel</a>
-          <a href="#preuves" class="rounded-lg px-5 py-3 border border-white/15 hover:bg-white/5">Voir des retours</a>
+          <a href="#temoignages" class="rounded-lg px-5 py-3 border border-white/15 hover:bg-white/5">Voir des retours</a>
         </div>
         <p class="mt-4 text-sm text-text-muted">Pontarlier • Doubs • Suisse voisine • Présentiel & visio</p>
       </div>
@@ -144,7 +145,7 @@ const faq = [
   </section>
 
   <!-- TÉMOIGNAGES -->
-  <section id="preuves" class="container py-12">
+  <section id="temoignages" class="container py-12">
     <SectionTitle eyebrow="Témoignages" title="Ce qui change concrètement" subtitle="Des retours courts, orientés résultats." />
     <Testimonials items={testimonials} />
   </section>
