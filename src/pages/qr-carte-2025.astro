@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Redirection…" description="Redirection vers la page d’accueil.">
+  <main class="container py-16">
+    <p class="text-text-muted">Redirection en cours…</p>
+  </main>
+
+  <script>
+    // URL cible (accueil du site)
+    const target = import.meta.env.BASE_URL;
+
+    // Tracking GA4 si présent (gtag)
+    try {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'qr_redirect', {
+          event_category: 'QR',
+          event_label: 'carte_visite_2025',
+          transport_type: 'beacon'
+        });
+      }
+    } catch (_) {}
+
+    // Laisse une micro-fenêtre pour envoyer le beacon, puis redirige
+    setTimeout(() => {
+      window.location.replace(target);
+    }, 256);
+  </script>
+</BaseLayout>
