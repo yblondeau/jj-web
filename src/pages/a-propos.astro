@@ -7,22 +7,22 @@ import Footer from '../components/Footer.astro';
 import { nav } from '../data/nav';
 import { withBase } from '../utils/paths';
 
-/** 🔧 À compléter avec les intitulés réels dès que possible */
 const credentials = [
   {
-    name: 'Certification Coaching (à préciser)',
-    issuer: 'Organisme / École (à préciser)',
-    url: '#'
+    name: 'Formation Coaching mentale général et spécifique',
+    issuer: 'NVB coaching, Genève, 2016'
   },
   {
-    name: 'Formation PNL (à préciser)',
-    issuer: 'Institut (à préciser)',
-    url: '#'
+    name: 'Formation PNL et Hypnose',
+    issuer: 'Technicien PNL, Mindev Therapie, 2017'
   },
   {
-    name: 'Brevet d’État Natation (mentionner précisément si applicable)',
-    issuer: 'Ministère / Fédération (à préciser)',
-    url: '#'
+    name: 'Brevet d’État Natation',
+    issuer: 'ERFAN Bourgogne Franche-comté 2006'
+  },
+  {
+    name: 'Brevet fédéral Triathlon',
+    issuer: '2006'
   }
 ];
 ---
@@ -45,8 +45,7 @@ const credentials = [
   {credentials.map((c) => (
     <SchemaOrg type="EducationalOccupationalCredential" data={{
       name: c.name,
-      recognizedBy: { '@type': 'Organization', name: c.issuer },
-      url: c.url
+      recognizedBy: { '@type': 'Organization', name: c.issuer }
     }} />
   ))}
 
