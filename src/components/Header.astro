@@ -4,12 +4,14 @@ interface Props {
   links: Link[];
   ctaLabel?: string; ctaHref?: string;
   transparentOnTop?: boolean;
+  scrollScaleLogo?: boolean;
 }
 const {
   links,
   ctaLabel = 'Réserver un appel',
   ctaHref = '/contact',
-  transparentOnTop = false
+  transparentOnTop = false,
+  scrollScaleLogo = false
 } = Astro.props as Props;
 
 import LogoJJ from './LogoJJ.astro';
@@ -25,7 +27,9 @@ import { withBase } from '../utils/paths';
     <!-- Brand -->
     <a id="brand" href={withBase('')} class={`flex items-center gap-2 transition-colors focus-visible:outline-none
       ${transparentOnTop ? 'text-white' : 'text-black'}`}>
-      <LogoJJ title="Logo JJ" class="w-8 h-8 md:w-10 md:h-10" />
+      <div id="logoContainer" data-scroll-scale={scrollScaleLogo}>
+        <LogoJJ title="Logo JJ" class="w-8 h-8 md:w-10 md:h-10" />
+      </div>
       <span class="sr-only">Julien Jeangirard</span>
     </a>
 
@@ -80,6 +84,7 @@ import { withBase } from '../utils/paths';
   const header    = document.getElementById('site-header');
   const brand     = document.getElementById('brand');
   const headerCta = document.getElementById('headerCta');
+  const logoContainer = document.getElementById('logoContainer');
 
   const toggle    = document.getElementById('menuToggle');
   const menu      = document.getElementById('mobileMenu');
@@ -88,6 +93,7 @@ import { withBase } from '../utils/paths';
   const iconClose = document.getElementById('iconClose');
 
   const isTransparentOnTop = header?.dataset.transparent === 'true';
+  const isScrollScaleEnabled = logoContainer?.dataset.scrollScale === 'true';
 
   const colorize = () => {
     if (!isTransparentOnTop) {
@@ -97,6 +103,26 @@ import { withBase } from '../utils/paths';
     if (window.scrollY > 80 || !header) return makeOpaque();
     makeTransparent();
   };
+
+  const scaleLogoOnScroll = () => {
+    if (!isScrollScaleEnabled || !logoContainer) return;
+    
+    // Logo scales from 1.5x at top to 1x at 400px scroll
+    // Max scale at top, min scale at 400px and beyond
+    const maxScale = 1.6;
+    const minScale = 1;
+    const scrollThreshold = 400;
+    
+    const scrolled = window.scrollY;
+    let scale = maxScale - (scrolled / scrollThreshold) * (maxScale - minScale);
+    
+    // Clamp the scale between minScale and maxScale
+    scale = Math.max(minScale, Math.min(maxScale, scale));
+    
+    logoContainer.style.transform = `scale(${scale})`;
+    logoContainer.style.transformOrigin = 'left center';
+  };
+
   function makeOpaque(){
     console.log('making opaque');
     header?.classList.add('is-opaque');
@@ -121,7 +147,11 @@ import { withBase } from '../utils/paths';
   }
 
   colorize();
-  window.addEventListener('scroll', colorize, { passive: true });
+  if (isScrollScaleEnabled) scaleLogoOnScroll();
+  window.addEventListener('scroll', () => {
+    colorize();
+    if (isScrollScaleEnabled) scaleLogoOnScroll();
+  }, { passive: true });
 
   // Toggle mobile menu
   toggle?.addEventListener('click', () => {
