@@ -8,6 +8,19 @@ import { nav } from '../data/nav';
 import { withBase } from '../utils/paths';
 ---
 
+<style>
+  select {
+    background-color: transparent;
+    appearance: none;
+    cursor: pointer;
+  }
+  
+  select option {
+    background-color: #3b3535;
+    color: #F4F2F3;
+  }
+</style>
+
 <BaseLayout
   title="Contact — Julien Jeangirard Coaching"
   description="Contactez Julien Jeangirard : coaching de vie, préparation mentale, coaching en entreprise — Pontarlier, Doubs & Suisse voisine, ou visio."
@@ -103,7 +116,7 @@ import { withBase } from '../utils/paths';
 
           <!-- 3. Objectifs -->
           <div id="p_objectifs_block" class="mt-6">
-            <label class="block text-sm mb-2">Quels sont vos objectifs ? *</label>
+            <label id="p_obj_label" class="block text-sm mb-2" class="hidden">Quels sont vos objectifs ? *</label>
 
             <!-- Vie -->
             <div id="p_obj_vie" class="hidden">
@@ -311,6 +324,7 @@ import { withBase } from '../utils/paths';
     // Type de coaching (particulier) -> objectifs (affiche l'un, cache l'autre)
     // Sélecteurs
     const radiosType = $$('input[name="p_type"]');
+    const labelObj = document.getElementById('p_obj_label');
     const blockVie = document.getElementById('p_obj_vie');
     const blockMental = document.getElementById('p_obj_mental');
 
@@ -320,12 +334,14 @@ import { withBase } from '../utils/paths';
     }
 
     function showVieHideMental() {
+      labelObj.classList.remove('hidden');
       blockVie.classList.remove('hidden');
       blockMental.classList.add('hidden');
       clearChecks(blockMental);
     }
 
     function showMentalHideVie() {
+      labelObj.classList.remove('hidden');
       blockMental.classList.remove('hidden');
       blockVie.classList.add('hidden');
       clearChecks(blockVie);
@@ -355,6 +371,7 @@ import { withBase } from '../utils/paths';
       btn.addEventListener('click', () => {
         if (btn.dataset.persona === 'particulier') {
           // On ne montre AUCUNE liste tant que le type n’est pas choisi
+          labelObj.classList.add('hidden');
           blockVie.classList.add('hidden');
           blockMental.classList.add('hidden');
           clearChecks(blockVie);
