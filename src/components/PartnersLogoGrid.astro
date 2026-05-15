@@ -1,0 +1,25 @@
+---
+interface Props {
+  partners?: Array<{
+    name: string;
+    logo: string;
+    href?: string;
+  }>;
+}
+
+const { partners = [] } = Astro.props;
+---
+
+<div class="grid grid-cols-1 gap-8 items-center justify-items-center place-items-center mx-auto">
+  {partners.map((partner) => (
+    <div class="grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100">
+      {partner.href ? (
+        <a href={partner.href} target="_blank" rel="noopener noreferrer" title={partner.name}>
+          <img src={partner.logo} alt={partner.name} class="h-48 object-contain" />
+        </a>
+      ) : (
+        <img src={partner.logo} alt={partner.name} class="h-48 object-contain" />
+      )}
+    </div>
+  ))}
+</div>
